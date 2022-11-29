@@ -9,7 +9,7 @@ import type { Coin, Exchange, GlobalData } from './types';
 const useCoinGeckoApi = () => {
   const getCoins = useCallback(async () => {
     const { data }: AxiosResponse<Array<Coin>> = await api.get(
-      '/coins/markets?vs_currency=usd'
+      `/coins/markets?vs_currency=usd&price_change_percentage=24h,7d,30d&sparkline=true`
     );
 
     return data;
@@ -23,7 +23,7 @@ const useCoinGeckoApi = () => {
 
   const getExchanges = useCallback(async () => {
     const { data }: AxiosResponse<Array<Exchange>> = await api.get(
-      '/exchanges'
+      `/exchanges`
     );
 
     return data;

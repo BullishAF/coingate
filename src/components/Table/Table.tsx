@@ -1,8 +1,12 @@
 import { Table as MTable, Text } from '@mantine/core';
 
+import { useStyles } from './styles';
 import type { TableProps } from './types';
 
-const Table = ({ headers, children, ...props }: TableProps) => {
+const Table = ({ headers, loading, children, ...props }: TableProps) => {
+  const { classes } = useStyles();
+  const { CenteredRow } = classes;
+
   return (
     <MTable {...props}>
       <thead>
@@ -17,7 +21,17 @@ const Table = ({ headers, children, ...props }: TableProps) => {
         </tr>
       </thead>
 
-      <tbody>{children}</tbody>
+      <tbody>
+        {loading ? (
+          <tr>
+            <td className={CenteredRow} colSpan={headers.length}>
+              <Text weight="bold">Loading...</Text>
+            </td>
+          </tr>
+        ) : (
+          children
+        )}
+      </tbody>
     </MTable>
   );
 };

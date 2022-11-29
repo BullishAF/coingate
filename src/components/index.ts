@@ -1,3 +1,5 @@
+import PercentageText from './PercentageText';
+import Sparklines from './Sparklines';
 import Table from './Table';
 
-export { Table };
+export { PercentageText, Sparklines, Table };

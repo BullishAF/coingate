@@ -1,10 +1,13 @@
 /* eslint-disable react/jsx-newline */
+import { IoMdArrowRoundUp } from 'react-icons/io';
+
 import Image from 'next/image';
 
 import { Text } from '@mantine/core';
+import { useWindowScroll } from '@mantine/hooks';
 
-import { Table } from '@/components';
-import { formatCurrency, formatNumber } from '@/utils';
+import { PercentageText, Sparklines, Table } from '@/components';
+import { formatCurrency } from '@/utils';
 
 import { useCoins } from './hooks';
 import { useStyles } from './styles';
@@ -13,42 +16,58 @@ const COINS_TABLE_HEADERS = [
   'Coin',
   'Price',
   '24h',
+  '30d',
   'Market Capitalization',
-  'Total Volume'
+  'Total Volume',
+  'Last 7 Days'
 ];
 
 const Coins = () => {
   const { classes } = useStyles();
-  const { Wrapper, TableWrapper, TableData } = classes;
+  const {
+    Wrapper,
+    TableWrapper,
+    TableData,
+    SparklinesWrapper,
+    ScrollButton,
+    ScrollIcon
+  } = classes;
 
-  const { coins, isLoading } = useCoins();
+  const { coins, isLoading, isFetching } = useCoins();
 
-  if (isLoading) return <div>Loading...</div>;
+  const [scroll, scrollTo] = useWindowScroll();
+
+  const isRendering = isLoading || isFetching;
+
+  const handleScrollToTop = () => scrollTo({ y: 0 });
 
   return (
     <div className={Wrapper}>
       <div className={TableWrapper}>
         <Table
           withBorder
-          verticalSpacing="md"
+          verticalSpacing="sm"
           horizontalSpacing="lg"
+          loading={isRendering}
           headers={COINS_TABLE_HEADERS}
         >
           {coins &&
             coins.map((coin) => (
               <tr key={coin.id}>
-                <td className={TableData}>
-                  <Image
-                    src={coin.image}
-                    alt={coin.name}
-                    width={20}
-                    height={20}
-                  />
-
+                <td>
                   <div className={TableData}>
-                    <Text>{coin.name}</Text>
+                    <Image
+                      src={coin.image}
+                      alt={coin.name}
+                      width={20}
+                      height={20}
+                    />
 
-                    <Text color="gray">{coin.symbol.toUpperCase()}</Text>
+                    <div className={TableData}>
+                      <Text>{coin.name}</Text>
+
+                      <Text color="gray">{coin.symbol.toUpperCase()}</Text>
+                    </div>
                   </div>
                 </td>
 
@@ -56,15 +75,21 @@ const Coins = () => {
 
                 <td>
                   <div className={TableData}>
-                    <Text
+                    <PercentageText
+                      dynamicColorBasedOnValue
+                      value={coin.price_change_percentage_24h}
                       weight="bold"
-                      color={
-                        coin.price_change_percentage_24h > 0 ? 'green' : 'red'
-                      }
-                    >
-                      {coin.price_change_percentage_24h > 0 && '+'}{' '}
-                      {formatNumber(coin.price_change_percentage_24h)}%
-                    </Text>
+                    />
+                  </div>
+                </td>
+
+                <td>
+                  <div className={TableData}>
+                    <PercentageText
+                      dynamicColorBasedOnValue
+                      value={coin.price_change_percentage_30d_in_currency}
+                      weight="bold"
+                    />
                   </div>
                 </td>
 
@@ -77,10 +102,32 @@ const Coins = () => {
                 </td>
 
                 <td>{formatCurrency(coin.total_volume)}</td>
+
+                <td>
+                  <div className={SparklinesWrapper}>
+                    <Sparklines
+                      strokeWidth="3"
+                      data={coin.sparkline_in_7d.price}
+                      dynamicColorBasedOnValue={
+                        coin.price_change_percentage_7d_in_currency
+                      }
+                    />
+                  </div>
+                </td>
               </tr>
             ))}
         </Table>
       </div>
+
+      {scroll.y > 0 && (
+        <button
+          type="button"
+          className={ScrollButton}
+          onClick={handleScrollToTop}
+        >
+          <IoMdArrowRoundUp className={ScrollIcon} />
+        </button>
+      )}
     </div>
   );
 };

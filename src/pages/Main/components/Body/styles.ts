@@ -2,15 +2,30 @@ import { createStyles } from '@mantine/core';
 
 export const useStyles = createStyles(() => ({
   Wrapper: {
-    width: '75%',
+    width: '100%',
     height: 'calc(100vh - 4rem)',
     display: 'flex',
     flexDirection: 'column',
-    margin: '0 auto',
-    marginTop: '7.5rem'
+    marginTop: '7.5rem',
+
+    '@media (max-width: 768px)': {
+      marginTop: '6.5rem'
+    }
   },
   MarketInfoWrapper: {
+    width: '75%',
     display: 'flex',
-    gap: '10rem'
+    justifyContent: 'space-between',
+    margin: '0 auto',
+
+    '@media (max-width: 1585px)': {
+      width: '90%'
+    },
+    '@media (max-width: 768px)': {
+      width: '100%',
+      flexDirection: 'column',
+      gap: '1rem',
+      paddingLeft: '1rem'
+    }
   }
 }));

@@ -33,14 +33,14 @@ const Body = ({ activeTab }: BodyProps) => {
   return (
     <div className={Wrapper}>
       <div className={MarketInfoWrapper}>
-        <InfoItem title="Market Capitalization" value={getTotalMarketCap()} />
+        <InfoItem title="MARKET CAPITALIZATION" value={getTotalMarketCap()} />
 
-        <InfoItem title="24h Volume" value={getTotalMarketVolume()} />
+        <InfoItem title="24H VOLUME" value={getTotalMarketVolume()} />
 
-        <InfoItem title="BTC Dominance" value={getBTCMarketCapPercentage()} />
+        <InfoItem title="BTC DOMINANCE" value={getBTCMarketCapPercentage()} />
 
         <InfoItem
-          title="Active Coins"
+          title="ACTIVE COINS"
           value={getTotalActiveCryptocurrencies()}
         />
       </div>
