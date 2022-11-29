@@ -30,6 +30,17 @@ export default function App({ Component, pageProps }: AppProps) {
             fontSize: '88.5%',
             fontFamily: 'Archivo, sans-serif',
             backgroundColor: theme.colors.background
+          },
+          'body, button, input, textarea': {
+            fontFamily: 'Archivo, sans-serif',
+            border: 'none',
+            outline: 'inherit',
+            color: theme.colors.shapeDark
+          },
+          'button, a': {
+            cursor: 'pointer',
+            color: 'inherit',
+            textDecoration: 'none'
           }
         })}
       />
