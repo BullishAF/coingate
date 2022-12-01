@@ -6,21 +6,12 @@ import Image from 'next/image';
 import { Text } from '@mantine/core';
 import { useWindowScroll } from '@mantine/hooks';
 
-import { PercentageText, Sparklines, Table } from '@/components';
+import { COINS_TABLE_HEADERS } from '@/constants';
+import { useCoins } from '@/hooks';
 import { formatCurrency } from '@/utils';
 
-import { useCoins } from './hooks';
+import { PercentageText, Sparklines, Table } from '../../../elements';
 import { useStyles } from './styles';
-
-const COINS_TABLE_HEADERS = [
-  'Coin',
-  'Price',
-  '24h',
-  '30d',
-  'Market Capitalization',
-  'Total Volume',
-  'Last 7 Days'
-];
 
 const Coins = () => {
   const { classes } = useStyles();

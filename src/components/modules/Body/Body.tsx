@@ -1,7 +1,8 @@
 import { TABS } from '@/constants';
+import { useGlobalData } from '@/hooks';
 
-import { CoinsTab, ExchangesTab, InfoItem } from './components';
-import { useGlobalData } from './hooks';
+import { CoinsTab, ExchangesTab } from '../';
+import { InfoItem } from '../../elements';
 import { useStyles } from './styles';
 import type { BodyProps } from './types';
 

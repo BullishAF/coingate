@@ -3,4 +3,14 @@ export const TABS = {
   EXCHANGES: 'exchanges'
 };
 
+export const COINS_TABLE_HEADERS = [
+  'Coin',
+  'Price',
+  '24h',
+  '30d',
+  'Market Capitalization',
+  'Total Volume',
+  'Last 7 Days'
+];
+
 export const BASE_DIVISOR = 10000;

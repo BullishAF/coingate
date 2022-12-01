@@ -1,9 +1,9 @@
 import { Text } from '@mantine/core';
 
 import { TABS } from '@/constants';
+import type { AppTab } from '@/hooks/useTabs/types';
 
-import type { AppTab } from '../../hooks/useTabs/types';
-import { SectionItem } from './components';
+import { SectionItem } from '../../elements';
 import { useStyles } from './styles';
 import type { HeaderProps } from './types';
 

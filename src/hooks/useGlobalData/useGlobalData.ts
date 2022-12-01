@@ -3,7 +3,7 @@ import { useQuery } from '@tanstack/react-query';
 import { BASE_DIVISOR } from '@/constants';
 import { formatCurrency, formatNumber } from '@/utils';
 
-import { useCoinGeckoApi } from '../../../../hooks';
+import { useCoinGeckoApi } from '../';
 
 const useGlobalData = () => {
   const { getGlobalData } = useCoinGeckoApi();
