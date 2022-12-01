@@ -1,19 +1,7 @@
-import { Body, Header } from './components';
-import { useTabs } from './hooks';
+import { MainTemplate } from '@/components/templates';
 
 const Main = () => {
-  const { handleChangeTab, activeTab } = useTabs();
-
-  return (
-    <>
-      <Header
-        activeTab={activeTab}
-        onChangeTab={(current) => handleChangeTab(current)}
-      />
-
-      <Body activeTab={activeTab} />
-    </>
-  );
+  return <MainTemplate />;
 };
 
 export default Main;

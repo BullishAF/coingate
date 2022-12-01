@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 
-import { useCoinGeckoApi } from '../../../../../../../hooks';
+import { useCoinGeckoApi } from '../';
 
 const useCoins = () => {
   const { getCoins } = useCoinGeckoApi();
