@@ -14,7 +14,7 @@ const Header = ({ onChangeTab, activeTab }: HeaderProps) => {
   return (
     <div className={Wrapper}>
       <div className={Container}>
-        <Text className={AppName} color="white" size="xl">
+        <Text className={AppName} weight={600} size="xl">
           coingate
         </Text>
 

@@ -9,7 +9,7 @@ const InfoItem = ({ title, value }: InfoItemProps) => {
 
   return (
     <div className={Wrapper}>
-      <Text color="gray" className={Title}>
+      <Text color="gray" weight={600} className={Title}>
         {title}
       </Text>
 
