@@ -23,6 +23,7 @@ export const useStyles = createStyles(() => ({
     },
     '@media (max-width: 768px)': {
       width: '100%',
+      height: 'fit-content',
       flexDirection: 'column',
       gap: '1rem',
       paddingLeft: '1rem'

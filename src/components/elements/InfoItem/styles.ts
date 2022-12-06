@@ -19,7 +19,7 @@ export const useStyles = createStyles(() => ({
       fontSize: '26px'
     },
     '@media (max-width: 1060px)': {
-      fontSize: '20px'
+      fontSize: '22px'
     },
     '@media (max-width: 768px)': {
       fontSize: '28px'
