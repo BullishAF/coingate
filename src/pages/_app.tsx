@@ -14,28 +14,30 @@ export default function App({ Component, pageProps }: AppProps) {
       theme={{
         fontFamily: theme.font.family,
         fontSizes: theme.font.sizes,
-        colors: theme.colors as any
+        colors: theme.colors as Record<string, any>
       }}
     >
       <Global
         styles={(theme) => ({
           '*': {
+            WebkitFontSmoothing: 'antialiased',
             WebkitAppearance: 'none',
             margin: 0,
             padding: 0,
             boxSizing: 'border-box'
           },
           'html, body': {
-            color: theme.colors.shapeDark,
             fontSize: '88.5%',
-            fontFamily: 'Archivo, sans-serif',
+            fontFamily: theme.fontFamily,
+            fontWeight: 500,
+            color: theme.colors.text,
             backgroundColor: theme.colors.background
           },
           'body, button, input, textarea': {
-            fontFamily: 'Archivo, sans-serif',
+            fontFamily: theme.fontFamily,
             border: 'none',
             outline: 'inherit',
-            color: theme.colors.shapeDark
+            color: theme.colors.text
           },
           'button, a': {
             cursor: 'pointer',

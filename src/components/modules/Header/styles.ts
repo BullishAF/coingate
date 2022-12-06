@@ -9,6 +9,7 @@ export const useStyles = createStyles((theme) => ({
     alignItems: 'center',
     position: 'fixed',
     top: 0,
+    zIndex: 2,
     backgroundColor: theme.colors.shapeDark
   },
   Container: {

@@ -7,29 +7,49 @@ export const useStyles = createStyles((theme) => ({
     flexDirection: 'column'
   },
   TableWrapper: {
-    width: '75%',
+    width: '80%',
     margin: '0 auto',
     marginTop: '5rem',
     overflowX: 'auto',
 
-    '@media (max-width: 1420px)': {
+    td: {
+      overflowY: 'hidden'
+    },
+
+    '@media (max-width: 1670px)': {
       width: '90%'
     },
-    '@media (max-width: 1175px)': {
+    '@media (max-width: 1425px)': {
+      width: '95%'
+    },
+    '@media (max-width: 1360px)': {
       width: '100%'
     },
     '@media (max-width: 768px)': {
-      width: '100%',
       margin: 'unset',
       marginTop: '3rem'
     }
   },
   TableData: {
     display: 'flex',
-    gap: '0.5rem'
+    alignItems: 'center',
+
+    '> div': {
+      marginLeft: '0.4rem',
+
+      '@media (max-width: 1580px)': {
+        flexDirection: 'column',
+        alignItems: 'flex-start'
+      }
+    }
+  },
+  TableDataFixed: {
+    position: 'sticky',
+    left: 0
   },
   SparklinesWrapper: {
-    minWidth: '10rem'
+    minWidth: '10rem',
+    height: '2.5rem'
   },
   ScrollButton: {
     position: 'fixed',

@@ -1,24 +1,59 @@
-import { Text } from '@mantine/core';
+/* eslint-disable react/jsx-no-useless-fragment */
+import { IoMdArrowDropdown, IoMdArrowDropup } from 'react-icons/io';
 
-import { theme } from '@/styles';
+import { Text, useMantineTheme } from '@mantine/core';
+
 import { formatNumber } from '@/utils';
 
+import { useStyles } from './styles';
 import type { PercentageTextProps } from './types';
 
 const PercentageText = ({
   value,
   weight = 'normal',
+  prefersIndicatorIcon,
   dynamicColorBasedOnValue
 }: PercentageTextProps) => {
-  let color = theme.colors.shapeDark;
-  const parsedValue = `${value > 0 ? '+' : ''}${formatNumber(value)}%`;
+  const { classes } = useStyles();
+  const { Wrapper, Icon } = classes;
 
-  if (dynamicColorBasedOnValue) color = value > 0 ? 'green' : 'red';
+  const { colors } = useMantineTheme();
+
+  const isPositive = value > 0;
+  let color: string | Array<string> = colors.shapeDark;
+
+  if (dynamicColorBasedOnValue)
+    color = isPositive ? colors.green[7] : colors.red[6];
+
+  const parsedValue = () => {
+    const formattedValue = `${formatNumber(value, true)}%`;
+
+    if (!prefersIndicatorIcon)
+      return `${isPositive ? '+' : ''}${formattedValue}`;
+
+    return formattedValue;
+  };
 
   return (
-    <div>
-      <Text weight={weight} color={color}>
-        {parsedValue}
+    <div className={Wrapper}>
+      {prefersIndicatorIcon && (
+        <>
+          {isPositive ? (
+            <IoMdArrowDropup
+              className={Icon}
+              style={{ color: color as string }}
+            />
+          ) : (
+            <IoMdArrowDropdown
+              className={Icon}
+              style={{ color: color as string }}
+            />
+          )}
+        </>
+      )}
+
+      <Text weight={weight} color={color as string}>
+        {parsedValue()}
       </Text>
     </div>
   );

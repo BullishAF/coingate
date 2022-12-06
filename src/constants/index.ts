@@ -9,7 +9,8 @@ export const COINS_TABLE_HEADERS = [
   '24h',
   '30d',
   'Market Capitalization',
-  'Total Volume',
+  'Volume (24h)',
+  'Circulating Supply',
   'Last 7 Days'
 ];
 

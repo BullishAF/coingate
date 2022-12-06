@@ -1,3 +1,5 @@
+import { Skeleton } from '@mantine/core';
+
 import { TABS } from '@/constants';
 import { useGlobalData } from '@/hooks';
 
@@ -29,11 +31,13 @@ const Body = ({ activeTab }: BodyProps) => {
     }
   };
 
-  if (isLoading) return <div>Loading...</div>;
-
   return (
     <div className={Wrapper}>
-      <div className={MarketInfoWrapper}>
+      <Skeleton
+        height="100px"
+        visible={isLoading}
+        className={MarketInfoWrapper}
+      >
         <InfoItem title="MARKET CAPITALIZATION" value={getTotalMarketCap()} />
 
         <InfoItem title="24H VOLUME" value={getTotalMarketVolume()} />
@@ -44,7 +48,7 @@ const Body = ({ activeTab }: BodyProps) => {
           title="ACTIVE COINS"
           value={getTotalActiveCryptocurrencies()}
         />
-      </div>
+      </Skeleton>
 
       {renderActiveTab()}
     </div>

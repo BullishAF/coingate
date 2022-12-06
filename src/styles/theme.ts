@@ -1,6 +1,6 @@
 export const theme = {
   font: {
-    family: 'Archivo, sans-serif',
+    family: 'Inter, sans-serif',
     sizes: {
       xs: 12,
       sm: 14,
@@ -10,8 +10,9 @@ export const theme = {
     }
   },
   colors: {
-    background: '#f4f6ff',
+    background: '#fff',
     shapeDark: '#212121',
-    shapeLight: '#fff'
+    shapeLight: '#fff',
+    text: '#222531'
   }
 };

@@ -7,6 +7,7 @@ export type Coin = {
   total_volume: number;
   market_cap: number;
   market_cap_rank: number;
+  circulating_supply: number;
   price_change_percentage_24h: number;
   price_change_percentage_7d_in_currency: number;
   price_change_percentage_30d_in_currency: number;

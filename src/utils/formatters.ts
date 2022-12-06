@@ -5,8 +5,12 @@ export const formatCurrency = (value: number) => {
   }).format(value);
 };
 
-export const formatNumber = (value: number) => {
-  return new Intl.NumberFormat('en-US', {
+export const formatNumber = (value: number, prefersAbsoluteValue = false) => {
+  const formattedNumber = new Intl.NumberFormat('en-US', {
     maximumFractionDigits: 2
   }).format(value);
+
+  if (prefersAbsoluteValue) return formattedNumber.replace('-', '');
+
+  return formattedNumber;
 };

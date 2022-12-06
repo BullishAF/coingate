@@ -3,7 +3,7 @@ import { createStyles } from '@mantine/core';
 export const useStyles = createStyles(() => ({
   Wrapper: {
     width: '100%',
-    height: 'calc(100vh - 4rem)',
+    height: '100%',
     display: 'flex',
     flexDirection: 'column',
     marginTop: '7.5rem',
@@ -23,6 +23,7 @@ export const useStyles = createStyles(() => ({
     },
     '@media (max-width: 768px)': {
       width: '100%',
+      height: 'fit-content',
       flexDirection: 'column',
       gap: '1rem',
       paddingLeft: '1rem'
