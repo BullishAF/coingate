@@ -9,7 +9,7 @@ export const useStyles = createStyles((theme) => ({
   TableWrapper: {
     width: '80%',
     margin: '0 auto',
-    marginTop: '5rem',
+    marginTop: '3.5rem',
     overflowX: 'auto',
 
     td: {

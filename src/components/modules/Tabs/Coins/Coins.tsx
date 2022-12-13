@@ -1,4 +1,5 @@
 /* eslint-disable react/jsx-newline */
+import { useState } from 'react';
 
 import Image from 'next/image';
 
@@ -17,6 +18,9 @@ import {
 import { useStyles } from './styles';
 
 const Coins = () => {
+  const [currentPage, setCurrentPage] = useState(1);
+  const [searchedCoin, setSearchedCoin] = useState('');
+
   const { classes } = useStyles();
   const {
     Wrapper,
@@ -26,19 +30,33 @@ const Coins = () => {
     SparklinesWrapper
   } = classes;
 
-  const { coins, isLoading, isFetching } = useCoins();
+  const { coins, coinsState, coinState } = useCoins({
+    desiredPage: currentPage,
+    coinId: searchedCoin
+  });
 
-  const isMounting = isLoading || isFetching;
+  const isMounting =
+    coinsState.isLoading ||
+    coinsState.isFetching ||
+    coinState.isLoading ||
+    coinState.isFetching;
+
+  const handleChangePage = (desiredPage: number) => setCurrentPage(desiredPage);
+
+  const handleSearchCoin = (coin: string) => setSearchedCoin(coin);
 
   return (
     <div className={Wrapper}>
       <div className={TableWrapper}>
         <Table
           withBorder
+          searchable
           highlightOnHover
-          verticalSpacing="sm"
-          horizontalSpacing="lg"
           loading={isMounting}
+          searchPlaceholder="Search a coin by name"
+          totalItems={coins?.length}
+          onChangePage={handleChangePage}
+          onSearch={handleSearchCoin}
           headers={COINS_TABLE_HEADERS}
           data={coins?.map((coin) => (
             <tr key={coin.id}>

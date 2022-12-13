@@ -6,22 +6,12 @@ export const useStyles = createStyles(() => ({
     flexDirection: 'column'
   },
   Title: {
-    fontSize: '14px',
-
-    '@media (max-width: 1060px) and (min-width: 768px)': {
-      fontSize: '12px'
-    }
+    fontSize: '14px'
   },
   Value: {
     fontSize: '32px',
 
     '@media (max-width: 1250px)': {
-      fontSize: '26px'
-    },
-    '@media (max-width: 1060px)': {
-      fontSize: '22px'
-    },
-    '@media (max-width: 768px)': {
       fontSize: '28px'
     }
   }
