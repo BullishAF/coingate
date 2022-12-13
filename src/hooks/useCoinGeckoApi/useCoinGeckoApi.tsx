@@ -7,9 +7,9 @@ import { api } from '@/config';
 import type { Coin, Exchange, GlobalData } from './types';
 
 const useCoinGeckoApi = () => {
-  const getCoins = useCallback(async () => {
+  const getCoins = useCallback(async (desiredPage = 1) => {
     const { data }: AxiosResponse<Array<Coin>> = await api.get(
-      `/coins/markets?vs_currency=usd&price_change_percentage=24h,7d,30d&sparkline=true`
+      `/coins/markets?vs_currency=usd&page=${desiredPage}&price_change_percentage=24h,7d,30d&sparkline=true`
     );
 
     return data;

@@ -14,6 +14,7 @@ export const useStyles = createStyles(() => ({
   },
   MarketInfoWrapper: {
     width: '75%',
+    height: 'fit-content',
     display: 'flex',
     justifyContent: 'space-between',
     margin: '0 auto',
@@ -21,11 +22,14 @@ export const useStyles = createStyles(() => ({
     '@media (max-width: 1585px)': {
       width: '90%'
     },
+    '@media (max-width: 1060px)': {
+      flexWrap: 'wrap',
+      justifyContent: 'flex-start',
+      gap: '2rem'
+    },
     '@media (max-width: 768px)': {
-      width: '100%',
-      height: 'fit-content',
       flexDirection: 'column',
-      gap: '1rem',
+      gap: '1.25rem',
       paddingLeft: '1rem'
     }
   }

@@ -1,4 +1,6 @@
 export const formatCurrency = (value: number) => {
+  if (!value || value === 0) return '-';
+
   return new Intl.NumberFormat('en-US', {
     style: 'currency',
     currency: 'USD'
@@ -6,6 +8,8 @@ export const formatCurrency = (value: number) => {
 };
 
 export const formatNumber = (value: number, prefersAbsoluteValue = false) => {
+  if (!value || value === 0) return '-';
+
   const formattedNumber = new Intl.NumberFormat('en-US', {
     maximumFractionDigits: 2
   }).format(value);
