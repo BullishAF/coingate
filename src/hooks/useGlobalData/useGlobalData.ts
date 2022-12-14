@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 
-import { BASE_DIVISOR } from '@/constants';
+import { BASE_DIVISOR, REFETCH_INTERVAL_MS } from '@/constants';
 import { formatCurrency, formatNumber } from '@/utils';
 
 import { useCoinGeckoApi } from '../';
@@ -10,7 +10,9 @@ const useGlobalData = () => {
 
   const { data, isLoading } = useQuery({
     queryKey: ['globalData'],
-    queryFn: getGlobalData
+    queryFn: getGlobalData,
+    refetchOnWindowFocus: false,
+    refetchInterval: REFETCH_INTERVAL_MS
   });
 
   const getTotalMarketCap = () => {
