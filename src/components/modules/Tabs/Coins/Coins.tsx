@@ -35,11 +35,7 @@ const Coins = () => {
     coinId: searchedCoin
   });
 
-  const isMounting =
-    coinsState.isLoading ||
-    coinsState.isFetching ||
-    coinState.isLoading ||
-    coinState.isFetching;
+  const isLoading = coinsState.isLoading || coinState.isLoading;
 
   const handleChangePage = (desiredPage: number) => setCurrentPage(desiredPage);
 
@@ -52,7 +48,7 @@ const Coins = () => {
           withBorder
           searchable
           highlightOnHover
-          loading={isMounting}
+          loading={isLoading}
           searchPlaceholder="Search a coin by name"
           totalItems={coins?.length}
           onChangePage={handleChangePage}
