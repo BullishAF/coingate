@@ -67,6 +67,8 @@ const Coins = () => {
                     alt={coin.name}
                     width={22}
                     height={22}
+                    blurDataURL={coin.image}
+                    placeholder="blur"
                   />
 
                   <div className={TableData}>
@@ -111,10 +113,12 @@ const Coins = () => {
                 <div>
                   <Text>{formatNumber(coin.total_volume)}</Text>
 
-                  <Text size="xs" color="gray">
-                    {formatNumber(coin.total_volume / coin.current_price)}{' '}
-                    {coin.symbol.toUpperCase()}
-                  </Text>
+                  {!!coin.total_volume && (
+                    <Text size="xs" color="gray">
+                      {formatNumber(coin.total_volume / coin.current_price)}{' '}
+                      {coin.symbol.toUpperCase()}
+                    </Text>
+                  )}
                 </div>
               </td>
 

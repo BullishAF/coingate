@@ -1,5 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 
+import { REFETCH_INTERVAL_MS } from '@/constants';
+
 import { useCoinGeckoApi } from '../';
 
 type UseCoinsProps = {
@@ -13,14 +15,16 @@ const useCoins = ({ desiredPage, coinId }: UseCoinsProps) => {
   const { data: coins, ...restCoinsState } = useQuery({
     queryKey: ['coins', desiredPage],
     queryFn: async () => await getCoins(desiredPage),
+    keepPreviousData: true,
     refetchOnWindowFocus: false,
-    keepPreviousData: true
+    refetchInterval: REFETCH_INTERVAL_MS
   });
 
   const { data: coin, ...restCoinState } = useQuery({
     queryKey: ['coin', coinId],
     queryFn: async () => await getCoinById(coinId),
-    refetchOnWindowFocus: false
+    refetchOnWindowFocus: false,
+    refetchInterval: REFETCH_INTERVAL_MS
   });
 
   return {

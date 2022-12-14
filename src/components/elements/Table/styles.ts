@@ -35,7 +35,7 @@ export const useStyles = createStyles(() => ({
   },
   Input: {
     width: '100%',
-    padding: '0 0.9rem',
+    padding: '0.5rem 0.9rem',
     fontSize: '14px',
 
     '@media (max-width: 610px)': {

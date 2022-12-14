@@ -15,3 +15,9 @@ export const COINS_TABLE_HEADERS = [
 ];
 
 export const BASE_DIVISOR = 10000;
+
+export const REFETCH_INTERVAL_MS = 1000 * 30;
+
+export const UNKNOWN_VALUE_CHAR = '-';
+
+export const DEFAULT_SPARKLINE_DATA = [1, 1];
