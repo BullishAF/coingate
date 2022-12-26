@@ -45,10 +45,12 @@ const useGlobalData = () => {
     return `${btcMarketCapPercentage}%`;
   };
 
-  const getTotalActiveCryptocurrencies = () => {
+  const getTotalActiveCryptocurrencies = (preferFormatted = true) => {
     if (!data) return 0;
 
-    return formatNumber(data.active_cryptocurrencies);
+    return preferFormatted
+      ? formatNumber(data.active_cryptocurrencies)
+      : data.active_cryptocurrencies;
   };
 
   return {
