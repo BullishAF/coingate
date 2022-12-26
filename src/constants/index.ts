@@ -16,6 +16,8 @@ export const COINS_TABLE_HEADERS = [
 
 export const BASE_DIVISOR = 10000;
 
+export const TOTAL_ITEMS_PER_PAGE = 50;
+
 export const REFETCH_INTERVAL_MS = 1000 * 30;
 
 export const UNKNOWN_VALUE_CHAR = '-';

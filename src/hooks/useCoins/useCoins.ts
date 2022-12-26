@@ -3,6 +3,7 @@ import { useQuery } from '@tanstack/react-query';
 import { REFETCH_INTERVAL_MS } from '@/constants';
 
 import { useCoinGeckoApi } from '../';
+import type { Coin } from '../useCoinGeckoApi/types';
 
 type UseCoinsProps = {
   desiredPage: number;
@@ -12,26 +13,30 @@ type UseCoinsProps = {
 const useCoins = ({ desiredPage, coinId }: UseCoinsProps) => {
   const { getCoins, getCoinById } = useCoinGeckoApi();
 
-  const { data: coins, ...restCoinsState } = useQuery({
+  let coins = [] as Array<Coin>;
+
+  const { data: coinsData, ...restCoinsState } = useQuery({
     queryKey: ['coins', desiredPage],
-    queryFn: async () => await getCoins(desiredPage),
+    queryFn: () => getCoins(desiredPage),
     keepPreviousData: true,
     refetchOnWindowFocus: false,
     refetchInterval: REFETCH_INTERVAL_MS
   });
 
-  const { data: coin, ...restCoinState } = useQuery({
+  const { data: coinData, ...restCoinState } = useQuery({
     queryKey: ['coin', coinId],
-    queryFn: async () => await getCoinById(coinId),
+    queryFn: () => getCoinById(coinId),
     refetchOnWindowFocus: false,
     refetchInterval: REFETCH_INTERVAL_MS
   });
 
+  if (coinData?.length && coinId.length) coins = coinData;
+  else if (coinsData?.length && !coinId.length) coins = coinsData;
+
   return {
     coinsState: { ...restCoinsState },
     coinState: { ...restCoinState },
-    coins,
-    coin
+    coins
   };
 };
 

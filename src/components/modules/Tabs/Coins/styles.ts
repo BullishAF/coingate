@@ -43,10 +43,6 @@ export const useStyles = createStyles((theme) => ({
       }
     }
   },
-  TableDataFixed: {
-    position: 'sticky',
-    left: 0
-  },
   SparklinesWrapper: {
     minWidth: '10rem',
     height: '2.5rem'

@@ -68,7 +68,7 @@ const Table = ({
             )}
           </div>
 
-          {totalItems && (
+          {totalItems ? (
             <Pagination
               color="gray"
               radius="md"
@@ -76,7 +76,7 @@ const Table = ({
               total={totalItems}
               onChange={onChangePage}
             />
-          )}
+          ) : null}
         </div>
       )}
 
