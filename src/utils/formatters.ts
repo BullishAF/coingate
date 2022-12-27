@@ -1,12 +1,12 @@
 import { UNKNOWN_VALUE_CHAR } from '@/constants';
 
-export const formatCurrency = (value: number) => {
+export const formatCurrency = (value: number, maximumFractionDigits = 6) => {
   if (!value || value === 0) return UNKNOWN_VALUE_CHAR;
 
   return new Intl.NumberFormat('en-US', {
     style: 'currency',
     currency: 'USD',
-    maximumFractionDigits: 6
+    maximumFractionDigits
   }).format(value);
 };
 

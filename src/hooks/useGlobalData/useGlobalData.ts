@@ -23,7 +23,7 @@ const useGlobalData = () => {
       0
     );
 
-    return formatCurrency(totalMarketCap);
+    return formatCurrency(totalMarketCap, 2);
   };
 
   const getTotalMarketVolume = () => {
@@ -34,7 +34,7 @@ const useGlobalData = () => {
       0
     );
 
-    return formatCurrency(totalMarketVolume);
+    return formatCurrency(totalMarketVolume, 2);
   };
 
   const getBTCMarketCapPercentage = () => {

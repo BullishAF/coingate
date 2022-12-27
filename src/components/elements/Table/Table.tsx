@@ -6,7 +6,7 @@ import { useMediaQuery } from '@mantine/hooks';
 import { useStyles } from './styles';
 import type { TableProps } from './types';
 
-const SCROLL_ACTIVE_VW = 720;
+const SMALL_VW = 720;
 
 const Table = ({
   loading,
@@ -23,9 +23,7 @@ const Table = ({
   const { classes } = useStyles();
   const { CenteredRow, NavigationWrapper, InputWrapper, Input } = classes;
 
-  const tableOverflowActive = useMediaQuery(
-    `(max-width: ${SCROLL_ACTIVE_VW}px)`
-  );
+  const isSmallScreen = useMediaQuery(`(max-width: ${SMALL_VW}px)`);
 
   const renderTableData = () => {
     if (loading)
@@ -72,7 +70,7 @@ const Table = ({
             <Pagination
               color="gray"
               radius="md"
-              size={tableOverflowActive ? 'sm' : 'md'}
+              size={isSmallScreen ? 'sm' : 'md'}
               total={totalItems}
               onChange={onChangePage}
             />
