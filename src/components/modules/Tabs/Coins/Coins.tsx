@@ -1,9 +1,9 @@
 /* eslint-disable react/jsx-newline */
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 
 import Image from 'next/image';
 
-import { Text } from '@mantine/core';
+import { Skeleton, Text } from '@mantine/core';
 import { useDebouncedValue } from '@mantine/hooks';
 
 import { COINS_TABLE_HEADERS, TOTAL_ITEMS_PER_PAGE } from '@/constants';
@@ -19,10 +19,11 @@ import {
 import { useStyles } from './styles';
 
 const Coins = () => {
+  const [isMounting, setIsMounting] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
   const [searchedCoin, setSearchedCoin] = useState('');
 
-  const [debouncedSearch] = useDebouncedValue(searchedCoin, 500);
+  const [debouncedSearch] = useDebouncedValue(searchedCoin, 800);
 
   const { classes } = useStyles();
   const { Wrapper, TableWrapper, TableData, SparklinesWrapper } = classes;
@@ -34,14 +35,11 @@ const Coins = () => {
 
   const { getTotalActiveCryptocurrencies } = useGlobalData();
 
-  const isLoading = coinsState.isLoading || coinState.isLoading;
+  const isLoading =
+    coinsState.isLoading || coinState.isLoading || coinsState.isFetching;
 
-  const totalCryptocurrenciesPerPage =
+  const totalCoinsPerPage =
     +getTotalActiveCryptocurrencies(false) / TOTAL_ITEMS_PER_PAGE;
-
-  const handleChangePage = (desiredPage: number) => setCurrentPage(desiredPage);
-
-  const handleSearchCoin = (coin: string) => setSearchedCoin(coin);
 
   const memoizedCoinsList = useMemo(
     () =>
@@ -55,8 +53,6 @@ const Coins = () => {
                   alt={coin.name}
                   width={22}
                   height={22}
-                  blurDataURL={coin.image}
-                  placeholder="blur"
                 />
               )}
 
@@ -94,7 +90,9 @@ const Coins = () => {
             <div className={TableData}>
               <Text>{formatCurrency(coin.market_cap)}</Text>
 
-              <Text color="gray">#{coin.market_cap_rank}</Text>
+              {!!coin.market_cap && (
+                <Text color="gray">#{coin.market_cap_rank}</Text>
+              )}
             </div>
           </td>
 
@@ -129,21 +127,27 @@ const Coins = () => {
     [SparklinesWrapper, TableData, coins]
   );
 
+  useEffect(() => setIsMounting(false), []);
+
   return (
     <div className={Wrapper}>
       <div className={TableWrapper}>
-        <Table
-          withBorder
-          searchable
-          highlightOnHover
-          loading={isLoading}
-          searchPlaceholder="Search a coin by name"
-          totalItems={totalCryptocurrenciesPerPage}
-          onChangePage={handleChangePage}
-          onSearch={handleSearchCoin}
-          headers={COINS_TABLE_HEADERS}
-          data={memoizedCoinsList}
-        />
+        {isMounting && <Skeleton height={1200} />}
+
+        {!isMounting && (
+          <Table
+            withBorder
+            searchable
+            highlightOnHover
+            loading={isLoading}
+            searchPlaceholder="Search a coin by name"
+            totalItems={totalCoinsPerPage}
+            onChangePage={setCurrentPage}
+            onSearch={setSearchedCoin}
+            headers={COINS_TABLE_HEADERS}
+            data={memoizedCoinsList}
+          />
+        )}
       </div>
 
       <ScrollBtn />

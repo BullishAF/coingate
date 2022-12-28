@@ -1,12 +1,13 @@
 import { ChangeEvent, Fragment } from 'react';
+import { IoSearchOutline } from 'react-icons/io5';
 
 import { Pagination, Skeleton, Table as MTable, Text } from '@mantine/core';
 import { useMediaQuery } from '@mantine/hooks';
 
+import { SMALL_VW } from '@/constants';
+
 import { useStyles } from './styles';
 import type { TableProps } from './types';
-
-const SCROLL_ACTIVE_VW = 720;
 
 const Table = ({
   loading,
@@ -21,11 +22,10 @@ const Table = ({
   ...props
 }: TableProps) => {
   const { classes } = useStyles();
-  const { CenteredRow, NavigationWrapper, InputWrapper, Input } = classes;
+  const { CenteredRow, NavigationWrapper, InputWrapper, SearchIcon, Input } =
+    classes;
 
-  const tableOverflowActive = useMediaQuery(
-    `(max-width: ${SCROLL_ACTIVE_VW}px)`
-  );
+  const isSmallScreen = useMediaQuery(`(max-width: ${SMALL_VW}px)`);
 
   const renderTableData = () => {
     if (loading)
@@ -43,7 +43,9 @@ const Table = ({
       return (
         <tr>
           <td className={CenteredRow} colSpan={headers.length}>
-            <Text weight="bold">No data to display</Text>
+            <Text color="gray" weight="bold">
+              No data to display
+            </Text>
           </td>
         </tr>
       );
@@ -57,22 +59,25 @@ const Table = ({
         <div className={NavigationWrapper}>
           <div className={InputWrapper}>
             {searchable && (
-              <input
-                type="text"
-                placeholder={searchPlaceholder ?? 'Search...'}
-                className={Input}
-                onChange={(e: ChangeEvent<HTMLInputElement>) =>
-                  onSearch!(e.target.value)
-                }
-              />
+              <>
+                <IoSearchOutline className={SearchIcon} />
+
+                <input
+                  type="text"
+                  placeholder={searchPlaceholder ?? 'Search...'}
+                  className={Input}
+                  onChange={(e: ChangeEvent<HTMLInputElement>) =>
+                    onSearch!(e.target.value)
+                  }
+                />
+              </>
             )}
           </div>
 
           {totalItems ? (
             <Pagination
-              color="gray"
-              radius="md"
-              size={tableOverflowActive ? 'sm' : 'md'}
+              color="dark"
+              size={isSmallScreen ? 'sm' : 'md'}
               total={totalItems}
               onChange={onChangePage}
             />
