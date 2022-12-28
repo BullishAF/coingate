@@ -35,7 +35,8 @@ const Coins = () => {
 
   const { getTotalActiveCryptocurrencies } = useGlobalData();
 
-  const isLoading = coinsState.isLoading || coinState.isLoading;
+  const isLoading =
+    coinsState.isLoading || coinState.isLoading || coinsState.isFetching;
 
   const totalCoinsPerPage =
     +getTotalActiveCryptocurrencies(false) / TOTAL_ITEMS_PER_PAGE;

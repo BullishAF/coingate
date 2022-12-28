@@ -1,6 +1,7 @@
 import { Skeleton } from '@mantine/core';
+import { motion } from 'framer-motion';
 
-import { TABS } from '@/constants';
+import { M_PROPS, TABS } from '@/constants';
 import { useGlobalData } from '@/hooks';
 
 import { CoinsTab, ExchangesTab } from '../';
@@ -38,16 +39,24 @@ const Body = ({ activeTab }: BodyProps) => {
         visible={isLoading}
         className={MarketInfoWrapper}
       >
-        <InfoItem title="MARKET CAPITALIZATION" value={getTotalMarketCap()} />
+        <motion.div transition={{ delay: 1.5, type: 'tween' }} {...M_PROPS}>
+          <InfoItem title="MARKET CAPITALIZATION" value={getTotalMarketCap()} />
+        </motion.div>
 
-        <InfoItem title="24H VOLUME" value={getTotalMarketVolume()} />
+        <motion.div transition={{ delay: 1.75, type: 'tween' }} {...M_PROPS}>
+          <InfoItem title="24H VOLUME" value={getTotalMarketVolume()} />
+        </motion.div>
 
-        <InfoItem title="BTC DOMINANCE" value={getBTCMarketCapPercentage()} />
+        <motion.div transition={{ delay: 2, type: 'tween' }} {...M_PROPS}>
+          <InfoItem title="BTC DOMINANCE" value={getBTCMarketCapPercentage()} />
+        </motion.div>
 
-        <InfoItem
-          title="ACTIVE COINS"
-          value={getTotalActiveCryptocurrencies()}
-        />
+        <motion.div transition={{ delay: 2.25, type: 'tween' }} {...M_PROPS}>
+          <InfoItem
+            title="ACTIVE COINS"
+            value={getTotalActiveCryptocurrencies()}
+          />
+        </motion.div>
       </Skeleton>
 
       {renderActiveTab()}

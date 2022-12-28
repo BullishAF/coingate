@@ -24,6 +24,8 @@ export const useStyles = createStyles(() => ({
   },
   InputWrapper: {
     width: '50%',
+    display: 'flex',
+    alignItems: 'center',
 
     '@media (max-width: 780px)': {
       width: '45%'
@@ -32,6 +34,11 @@ export const useStyles = createStyles(() => ({
       width: '100%',
       borderBottom: '1px solid #dee2e6'
     }
+  },
+  SearchIcon: {
+    width: '20px',
+    height: '20px',
+    marginLeft: '0.5rem'
   },
   Input: {
     width: '100%',

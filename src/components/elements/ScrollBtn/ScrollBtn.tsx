@@ -24,7 +24,7 @@ const ScrollBtn = () => {
       animate={{ scale: 1 }}
       whileHover={{ scale: 1.05 }}
       whileTap={{ scale: 0.9 }}
-      transition={{ type: 'spring', velocity: 2 }}
+      transition={{ velocity: 2 }}
     >
       <IoMdArrowRoundUp className={ScrollIcon} />
     </motion.button>
