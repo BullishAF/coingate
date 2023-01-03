@@ -32,5 +32,9 @@ export const useStyles = createStyles(() => ({
       gap: '1.25rem',
       paddingLeft: '1rem'
     }
+  },
+  BadgeWrapper: {
+    width: '7rem',
+    marginTop: '0.5rem'
   }
 }));

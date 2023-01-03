@@ -4,7 +4,11 @@ import { IoSearchOutline } from 'react-icons/io5';
 import { Pagination, Skeleton, Table as MTable, Text } from '@mantine/core';
 import { useMediaQuery } from '@mantine/hooks';
 
-import { SMALL_VW } from '@/constants';
+import {
+  SKELETON_TABLE_COLUMNS,
+  SKELETON_TABLE_ROWS,
+  SMALL_VW
+} from '@/constants';
 
 import { useStyles } from './styles';
 import type { TableProps } from './types';
@@ -22,16 +26,40 @@ const Table = ({
   ...props
 }: TableProps) => {
   const { classes } = useStyles();
-  const { CenteredRow, NavigationWrapper, InputWrapper, SearchIcon, Input } =
-    classes;
+  const {
+    CenteredRow,
+    NavigationWrapper,
+    InputWrapper,
+    SearchIcon,
+    Input,
+    Table
+  } = classes;
 
   const isSmallScreen = useMediaQuery(`(max-width: ${SMALL_VW}px)`);
 
+  const renderTableHeaders = () => {
+    if (loading) {
+      return Array.from({ length: SKELETON_TABLE_COLUMNS }).map((_, i) => (
+        <th key={i}>
+          <Skeleton width="150px" height="40px" />
+        </th>
+      ));
+    }
+
+    return headers.map((header) => (
+      <th key={header}>
+        <Text size="sm" weight={700}>
+          {header}
+        </Text>
+      </th>
+    ));
+  };
+
   const renderTableData = () => {
     if (loading)
-      return Array.from({ length: 15 }).map((_, i) => (
+      return Array.from({ length: SKELETON_TABLE_ROWS }).map((_, i) => (
         <tr key={i}>
-          {headers?.map((_, j) => (
+          {Array.from({ length: SKELETON_TABLE_COLUMNS }).map((_, j) => (
             <td key={j}>
               <Skeleton width="150px" height="40px" />
             </td>
@@ -76,7 +104,7 @@ const Table = ({
 
           {totalItems ? (
             <Pagination
-              color="dark"
+              color="gray"
               size={isSmallScreen ? 'sm' : 'md'}
               total={totalItems}
               onChange={onChangePage}
@@ -89,18 +117,11 @@ const Table = ({
         verticalSpacing="sm"
         horizontalSpacing="lg"
         highlightOnHover={highlightOnHover && !loading}
+        className={Table}
         {...props}
       >
         <thead>
-          <tr>
-            {headers.map((header) => (
-              <th key={header}>
-                <Text size="sm" weight={700}>
-                  {header}
-                </Text>
-              </th>
-            ))}
-          </tr>
+          <tr>{renderTableHeaders()}</tr>
         </thead>
 
         <tbody>{renderTableData()}</tbody>

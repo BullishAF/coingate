@@ -1,13 +1,18 @@
 /* eslint-disable react/jsx-newline */
-import { useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
+import { AiFillStar, AiOutlineStar } from 'react-icons/ai';
 
 import Image from 'next/image';
 
 import { Skeleton, Text } from '@mantine/core';
 import { useDebouncedValue } from '@mantine/hooks';
 
-import { COINS_TABLE_HEADERS, TOTAL_ITEMS_PER_PAGE } from '@/constants';
-import { useCoins, useGlobalData } from '@/hooks';
+import {
+  COINS_TABLE_HEADERS,
+  DEBOUNCE_INTERVAL_MS,
+  TOTAL_ITEMS_PER_PAGE
+} from '@/constants';
+import { useCoins, useGlobalData, useWatchlist } from '@/hooks';
 import { formatCurrency, formatNumber, isValidURL } from '@/utils';
 
 import {
@@ -23,10 +28,20 @@ const Coins = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [searchedCoin, setSearchedCoin] = useState('');
 
-  const [debouncedSearch] = useDebouncedValue(searchedCoin, 800);
+  const [debouncedSearch] = useDebouncedValue(
+    searchedCoin,
+    DEBOUNCE_INTERVAL_MS
+  );
 
   const { classes } = useStyles();
-  const { Wrapper, TableWrapper, TableData, SparklinesWrapper } = classes;
+  const {
+    Wrapper,
+    TableWrapper,
+    TableData,
+    SparklinesWrapper,
+    StarIconFilled,
+    StarIcon
+  } = classes;
 
   const { coins, coinsState, coinState } = useCoins({
     desiredPage: currentPage,
@@ -35,24 +50,54 @@ const Coins = () => {
 
   const { getTotalActiveCryptocurrencies } = useGlobalData();
 
+  const { watchlistCoin, coinsWatchlist } = useWatchlist();
+
   const isLoading =
     coinsState.isLoading || coinState.isLoading || coinsState.isFetching;
 
   const totalCoinsPerPage =
     +getTotalActiveCryptocurrencies(false) / TOTAL_ITEMS_PER_PAGE;
 
+  const handleWatchListCoin = useCallback(
+    (coinId: string) => watchlistCoin(coinId),
+    [watchlistCoin]
+  );
+
+  const handleChangePage = (desiredPage: number) => setCurrentPage(desiredPage);
+
+  const handleSearchCoin = (desiredCoin: string) =>
+    setSearchedCoin(desiredCoin.toLowerCase());
+
   const memoizedCoinsList = useMemo(
     () =>
       coins?.map((coin) => (
         <tr key={coin.id}>
+          <td>
+            {coinsWatchlist.includes(coin.id) ? (
+              <AiFillStar
+                className={StarIconFilled}
+                onClick={() => handleWatchListCoin(coin.id)}
+              />
+            ) : (
+              <AiOutlineStar
+                className={StarIcon}
+                onClick={() => handleWatchListCoin(coin.id)}
+              />
+            )}
+          </td>
+
+          <td>
+            <Text color="gray">{formatNumber(coin.market_cap_rank)}</Text>
+          </td>
+
           <td>
             <div className={TableData}>
               {isValidURL(coin.image) && (
                 <Image
                   src={coin.image}
                   alt={coin.name}
-                  width={22}
-                  height={22}
+                  width={25}
+                  height={25}
                 />
               )}
 
@@ -89,10 +134,6 @@ const Coins = () => {
           <td>
             <div className={TableData}>
               <Text>{formatCurrency(coin.market_cap)}</Text>
-
-              {!!coin.market_cap && (
-                <Text color="gray">#{coin.market_cap_rank}</Text>
-              )}
             </div>
           </td>
 
@@ -124,7 +165,15 @@ const Coins = () => {
           </td>
         </tr>
       )),
-    [SparklinesWrapper, TableData, coins]
+    [
+      SparklinesWrapper,
+      TableData,
+      coins,
+      StarIcon,
+      StarIconFilled,
+      coinsWatchlist,
+      handleWatchListCoin
+    ]
   );
 
   useEffect(() => setIsMounting(false), []);
@@ -142,8 +191,8 @@ const Coins = () => {
             loading={isLoading}
             searchPlaceholder="Search a coin by name"
             totalItems={totalCoinsPerPage}
-            onChangePage={setCurrentPage}
-            onSearch={setSearchedCoin}
+            onChangePage={handleChangePage}
+            onSearch={handleSearchCoin}
             headers={COINS_TABLE_HEADERS}
             data={memoizedCoinsList}
           />
