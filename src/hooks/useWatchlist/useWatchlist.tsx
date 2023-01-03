@@ -38,7 +38,7 @@ const WatchlistProvider = ({ children }: WatchlistProviderProps) => {
 
         localStorage.setItem(envs.watchlistStorageKey, stringifiedWatchlist);
 
-        toast.success('Coin removed from watchlist');
+        toast.success('Coin removed from watch list');
         return;
       }
 
@@ -50,7 +50,7 @@ const WatchlistProvider = ({ children }: WatchlistProviderProps) => {
 
       localStorage.setItem(envs.watchlistStorageKey, stringifiedWatchlist);
 
-      toast.success('Coin added to watchlist');
+      toast.success('Coin added to watch list');
     },
     [coinsWatchlist]
   );
@@ -72,7 +72,7 @@ const WatchlistProvider = ({ children }: WatchlistProviderProps) => {
 
         localStorage.setItem(envs.watchlistStorageKey, stringifiedWatchlist);
 
-        toast.success('Exchange removed from watchlist');
+        toast.success('Exchange removed from watch list');
         return;
       }
 
@@ -84,7 +84,7 @@ const WatchlistProvider = ({ children }: WatchlistProviderProps) => {
 
       localStorage.setItem(envs.watchlistStorageKey, stringifiedWatchlist);
 
-      toast.success('Exchange added to watchlist');
+      toast.success('Exchange added to watch list');
     },
     [exchangesWatchlist]
   );
