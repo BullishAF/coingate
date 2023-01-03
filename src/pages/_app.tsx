@@ -1,9 +1,12 @@
+import { Toaster } from 'react-hot-toast';
+
 import type { AppProps } from 'next/app';
 
 import { Global, MantineProvider } from '@mantine/core';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 
+import { WatchlistProvider } from '@/hooks';
 import { theme } from '@/styles';
 
 export default function App({ Component, pageProps }: AppProps) {
@@ -48,7 +51,11 @@ export default function App({ Component, pageProps }: AppProps) {
       />
 
       <QueryClientProvider client={queryClient}>
-        <Component {...pageProps} />
+        <WatchlistProvider>
+          <Component {...pageProps} />
+        </WatchlistProvider>
+
+        <Toaster position="top-right" />
 
         <ReactQueryDevtools />
       </QueryClientProvider>

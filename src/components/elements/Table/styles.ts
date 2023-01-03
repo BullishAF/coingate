@@ -1,6 +1,6 @@
 import { createStyles } from '@mantine/core';
 
-export const useStyles = createStyles(() => ({
+export const useStyles = createStyles((theme) => ({
   CenteredRow: {
     textAlign: 'center'
   },
@@ -9,9 +9,10 @@ export const useStyles = createStyles(() => ({
     display: 'flex',
     justifyContent: 'space-between',
     alignItems: 'center',
-    border: '1px solid #dee2e6',
-    borderBottom: 'none',
     padding: '0.5rem',
+    border: '1px solid ' + theme.colors.border,
+    borderBottom: 'none',
+    backgroundColor: theme.colors.shapeLight,
 
     '@media (max-width: 610px)': {
       flexDirection: 'column',
@@ -32,13 +33,14 @@ export const useStyles = createStyles(() => ({
     },
     '@media (max-width: 610px)': {
       width: '100%',
-      borderBottom: '1px solid #dee2e6'
+      borderBottom: '1px solid ' + theme.colors.border
     }
   },
   SearchIcon: {
     width: '20px',
     height: '20px',
-    marginLeft: '0.5rem'
+    marginLeft: '0.5rem',
+    color: theme.colors.gray[6]
   },
   Input: {
     width: '100%',
@@ -48,5 +50,8 @@ export const useStyles = createStyles(() => ({
     '@media (max-width: 610px)': {
       padding: '0.4rem'
     }
+  },
+  Table: {
+    backgroundColor: theme.colors.shapeLight
   }
 }));

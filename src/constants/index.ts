@@ -10,7 +10,13 @@ export const M_PROPS: HTMLMotionProps<'div'> = {
   animate: { opacity: 1, y: 0 }
 };
 
+export const SKELETON_TABLE_COLUMNS = 7;
+
+export const SKELETON_TABLE_ROWS = 15;
+
 export const COINS_TABLE_HEADERS = [
+  '',
+  '#',
   'Coin',
   'Price',
   '24h',
@@ -25,9 +31,11 @@ export const BASE_DIVISOR = 10000;
 
 export const SMALL_VW = 720;
 
-export const TOTAL_ITEMS_PER_PAGE = 50;
+export const TOTAL_ITEMS_PER_PAGE = 20;
 
 export const REFETCH_INTERVAL_MS = 1000 * 60;
+
+export const DEBOUNCE_INTERVAL_MS = 800;
 
 export const UNKNOWN_VALUE_CHAR = '-';
 

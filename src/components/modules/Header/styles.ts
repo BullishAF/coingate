@@ -3,14 +3,15 @@ import { createStyles } from '@mantine/core';
 export const useStyles = createStyles((theme) => ({
   Wrapper: {
     width: '100%',
-    height: '4rem',
+    height: '3.8rem',
     display: 'flex',
     justifyContent: 'space-between',
     alignItems: 'center',
     position: 'fixed',
     top: 0,
     zIndex: 2,
-    backgroundColor: theme.colors.shapeDark
+    borderBottom: '1px solid ' + theme.colors.border,
+    backgroundColor: theme.colors.shapeLight
   },
   Container: {
     width: '100%',
@@ -18,8 +19,14 @@ export const useStyles = createStyles((theme) => ({
     display: 'flex',
     gap: '15rem',
 
-    '@media (max-width: 575px)': {
-      gap: '5rem'
+    '@media (max-width: 620px)': {
+      gap: '8rem'
+    },
+    '@media (max-width: 510px)': {
+      gap: '4rem'
+    },
+    '@media (max-width: 450px)': {
+      gap: '2rem'
     }
   },
   AppName: {
@@ -27,14 +34,13 @@ export const useStyles = createStyles((theme) => ({
     alignSelf: 'center',
     marginLeft: '3.25rem',
     cursor: 'default',
-    color: theme.colors.background,
 
     '@media (max-width: 395px)': {
       marginLeft: '1.5rem'
     }
   },
   AppSections: {
-    width: '11rem',
+    width: '12rem',
     display: 'flex',
     justifyContent: 'space-between'
   }

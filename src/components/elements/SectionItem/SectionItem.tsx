@@ -1,17 +1,17 @@
-import { Text } from '@mantine/core';
+import { Text as DText } from '@mantine/core';
 
 import { useStyles } from './styles';
 import type { SectionItemProps } from './types';
 
 const SectionItem = ({ title, active, onClick }: SectionItemProps) => {
   const { classes } = useStyles();
-  const { Wrapper, Underline } = classes;
+  const { Wrapper, Text, Underline } = classes;
 
   return (
     <div className={Wrapper} onClick={onClick}>
-      <Text color="white" size="md">
+      <DText size="sm" color={active ? 'inherit' : 'gray'} className={Text}>
         {title}
-      </Text>
+      </DText>
 
       {active && <div className={Underline} />}
     </div>

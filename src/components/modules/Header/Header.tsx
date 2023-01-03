@@ -14,7 +14,11 @@ const Header = ({ onChangeTab, activeTab }: HeaderProps) => {
   return (
     <div className={Wrapper}>
       <div className={Container}>
-        <Text className={AppName} weight={600} size="xl">
+        <Text
+          style={{ fontFamily: 'Archivo, sans-serif' }}
+          className={AppName}
+          size={24}
+        >
           coingate
         </Text>
 

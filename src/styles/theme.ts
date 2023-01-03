@@ -10,9 +10,12 @@ export const theme = {
     }
   },
   colors: {
-    background: '#fff',
+    background: '#fafafa',
     shapeDark: '#212121',
     shapeLight: '#fff',
-    text: '#222531'
+    border: '#dee2e6',
+    text: '#333',
+    successLight: '#dcfadd',
+    dangerLight: '#f8e2e2'
   }
 };

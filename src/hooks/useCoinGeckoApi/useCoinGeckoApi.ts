@@ -1,4 +1,5 @@
 import { useCallback } from 'react';
+import { toast } from 'react-hot-toast';
 
 import type { AxiosResponse } from 'axios';
 
@@ -12,6 +13,10 @@ const useCoinGeckoApi = () => {
     const { data }: AxiosResponse<Array<Coin>> = await api.get(
       `/coins/markets?vs_currency=usd&page=${desiredPage}&per_page=${TOTAL_ITEMS_PER_PAGE}&price_change_percentage=24h,7d,30d&sparkline=true`
     );
+    if (!data || !data.length) {
+      toast.error('Could not fetch coins. Please try again later');
+      return;
+    }
 
     return data;
   }, []);
@@ -34,6 +39,10 @@ const useCoinGeckoApi = () => {
     const { data }: AxiosResponse<Array<Exchange>> = await api.get(
       `/exchanges`
     );
+    if (!data || !data.length) {
+      toast.error('Could not fetch exchanges. Please try again later');
+      return;
+    }
 
     return data;
   }, []);
@@ -46,6 +55,10 @@ const useCoinGeckoApi = () => {
 
   const getGlobalData = useCallback(async () => {
     const { data }: AxiosResponse<GlobalData> = await api.get('/global');
+    if (!data) {
+      toast.error('Could not fetch trading data. Please try again later');
+      return;
+    }
 
     return data?.data;
   }, []);

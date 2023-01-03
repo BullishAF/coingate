@@ -53,7 +53,7 @@ export const useStyles = createStyles((theme) => ({
     right: '2rem',
     padding: '0.75rem',
     borderRadius: '50%',
-    border: `1px solid ${theme.colors.gray['3']}`,
+    border: `1px solid ${theme.colors.gray[3]}`,
     backgroundColor: theme.colors.background,
     transition: 'all 0.2s ease',
     '&:hover': {
@@ -63,8 +63,17 @@ export const useStyles = createStyles((theme) => ({
       transform: 'scale(0.95)'
     }
   },
-  ScrollIcon: {
+  StarIconFilled: {
     width: '20px',
-    height: '20px'
+    height: '20px',
+    cursor: 'pointer',
+    color: theme.colors.yellow[6]
+  },
+  StarIcon: {
+    width: '20px',
+    height: '20px',
+    marginRight: '0.5rem',
+    cursor: 'pointer',
+    color: theme.colors.gray[5]
   }
 }));

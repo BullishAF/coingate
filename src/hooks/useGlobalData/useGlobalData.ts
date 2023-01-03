@@ -26,6 +26,16 @@ const useGlobalData = () => {
     return formatCurrency(totalMarketCap, 2);
   };
 
+  const getTotalMarketCapChangePercentage = () => {
+    if (!data) return 0;
+
+    const totalMarketCapChangePercentage = formatNumber(
+      data.market_cap_change_percentage_24h_usd
+    );
+
+    return totalMarketCapChangePercentage;
+  };
+
   const getTotalMarketVolume = () => {
     if (!data) return 0;
 
@@ -56,6 +66,7 @@ const useGlobalData = () => {
   return {
     isLoading,
     getTotalMarketCap,
+    getTotalMarketCapChangePercentage,
     getTotalMarketVolume,
     getBTCMarketCapPercentage,
     getTotalActiveCryptocurrencies

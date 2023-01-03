@@ -5,21 +5,24 @@ import { M_PROPS, TABS } from '@/constants';
 import { useGlobalData } from '@/hooks';
 
 import { CoinsTab, ExchangesTab } from '../';
-import { InfoItem } from '../../elements';
+import { Badge, InfoItem, PercentageText } from '../../elements';
 import { useStyles } from './styles';
 import type { BodyProps } from './types';
 
 const Body = ({ activeTab }: BodyProps) => {
-  const { classes } = useStyles();
-  const { Wrapper, MarketInfoWrapper } = classes;
+  const { classes, theme } = useStyles();
+  const { Wrapper, MarketInfoWrapper, BadgeWrapper } = classes;
 
   const {
     getTotalMarketCap,
+    getTotalMarketCapChangePercentage,
     getTotalMarketVolume,
     getBTCMarketCapPercentage,
     getTotalActiveCryptocurrencies,
     isLoading
   } = useGlobalData();
+
+  const totalMarketCapChangePercentage = +getTotalMarketCapChangePercentage();
 
   const renderActiveTab = () => {
     switch (activeTab) {
@@ -41,6 +44,23 @@ const Body = ({ activeTab }: BodyProps) => {
       >
         <motion.div transition={{ delay: 1.5, type: 'tween' }} {...M_PROPS}>
           <InfoItem title="MARKET CAPITALIZATION" value={getTotalMarketCap()} />
+
+          <div className={BadgeWrapper}>
+            <Badge
+              color={
+                totalMarketCapChangePercentage > 0
+                  ? theme.colors.successLight
+                  : theme.colors.dangerLight
+              }
+            >
+              <PercentageText
+                prefersIndicatorIcon
+                dynamicColorBasedOnValue
+                value={totalMarketCapChangePercentage}
+                weight="bold"
+              />
+            </Badge>
+          </div>
         </motion.div>
 
         <motion.div transition={{ delay: 1.75, type: 'tween' }} {...M_PROPS}>
