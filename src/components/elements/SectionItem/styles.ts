@@ -13,10 +13,12 @@ export const useStyles = createStyles((theme) => ({
   Text: {
     display: 'flex',
     justifyContent: 'center',
+    transition: 'all 0.2s ease',
 
     '&:hover': {
       padding: '0.2rem',
       borderRadius: '5px',
+      color: theme.colors.text,
       backgroundColor: theme.colors.gray[1]
     }
   },
