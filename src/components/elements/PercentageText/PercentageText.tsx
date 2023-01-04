@@ -47,7 +47,9 @@ const PercentageText = ({
   const parsedValue = () => {
     if (isNeutral) return UNKNOWN_VALUE_CHAR;
 
-    const formattedValue = `${formatNumber(value, true)}%`;
+    const formattedValue = `${formatNumber(value, {
+      prefersAbsoluteValue: true
+    })}%`;
 
     if (!prefersIndicatorIcon)
       return `${isPositive ? '+' : ''}${formattedValue}`;
