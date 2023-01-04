@@ -1,3 +1,9 @@
+export type GetCoinsRequestProps = Partial<{
+  page: number;
+  total: number;
+  includeTimeSeries: boolean;
+}>;
+
 export type Coin = {
   id: string;
   name: string;

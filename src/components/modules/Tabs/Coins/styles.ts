@@ -6,11 +6,10 @@ export const useStyles = createStyles((theme) => ({
     display: 'flex',
     flexDirection: 'column'
   },
-  TableWrapper: {
+  Content: {
     width: '80%',
     margin: '0 auto',
     marginTop: '3.5rem',
-    overflowX: 'auto',
 
     td: {
       overflowY: 'hidden'
@@ -74,6 +73,9 @@ export const useStyles = createStyles((theme) => ({
     height: '20px',
     marginRight: '0.5rem',
     cursor: 'pointer',
-    color: theme.colors.gray[5]
+    color: theme.colors.gray[5],
+    '&:hover': {
+      color: theme.colors.yellow[6]
+    }
   }
 }));

@@ -27,7 +27,7 @@ export const COINS_TABLE_HEADERS = [
   'Last 7 Days'
 ];
 
-export const BASE_DIVISOR = 10000;
+export const BASE_DIVISOR = 1000000; // 1M
 
 export const SMALL_VW = 720;
 
@@ -35,7 +35,7 @@ export const TOTAL_ITEMS_PER_PAGE = 20;
 
 export const REFETCH_INTERVAL_MS = 1000 * 60;
 
-export const DEBOUNCE_INTERVAL_MS = 800;
+export const DEBOUNCE_INTERVAL_MS = 1000; // 1s
 
 export const UNKNOWN_VALUE_CHAR = '-';
 

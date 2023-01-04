@@ -1,23 +1,31 @@
 import { UNKNOWN_VALUE_CHAR } from '@/constants';
 
-export const formatCurrency = (value: number, maximumFractionDigits = 6) => {
+type FormatOptions = Partial<{
+  maximumFractionDigits: number;
+  notation: Intl.NumberFormatOptions['notation'];
+  prefersAbsoluteValue: boolean;
+}>;
+
+export const formatCurrency = (value: number, options?: FormatOptions) => {
   if (!value || value === 0) return UNKNOWN_VALUE_CHAR;
 
   return new Intl.NumberFormat('en-US', {
     style: 'currency',
     currency: 'USD',
-    maximumFractionDigits
+    maximumFractionDigits: options?.maximumFractionDigits ?? 2,
+    notation: options?.notation ?? 'standard'
   }).format(value);
 };
 
-export const formatNumber = (value: number, prefersAbsoluteValue = false) => {
+export const formatNumber = (value: number, options?: FormatOptions) => {
   if (!value || value === 0) return UNKNOWN_VALUE_CHAR;
 
   const formattedNumber = new Intl.NumberFormat('en-US', {
-    maximumFractionDigits: 2
+    maximumFractionDigits: options?.maximumFractionDigits ?? 2,
+    notation: options?.notation ?? 'standard'
   }).format(value);
 
-  if (prefersAbsoluteValue) return formattedNumber.replace('-', '');
+  if (options?.prefersAbsoluteValue) return formattedNumber.replace('-', '');
 
   return formattedNumber;
 };
