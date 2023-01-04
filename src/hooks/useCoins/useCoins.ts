@@ -17,7 +17,7 @@ const useCoins = ({ desiredPage, coinId }: UseCoinsProps) => {
 
   const { data: coinsData, ...restCoinsState } = useQuery({
     queryKey: ['coins', desiredPage],
-    queryFn: () => getCoins(desiredPage),
+    queryFn: () => getCoins({ page: desiredPage, includeTimeSeries: true }),
     keepPreviousData: true,
     refetchOnWindowFocus: false,
     refetchInterval: REFETCH_INTERVAL_MS
@@ -27,7 +27,8 @@ const useCoins = ({ desiredPage, coinId }: UseCoinsProps) => {
     queryKey: ['coin', coinId],
     queryFn: () => getCoinById(coinId),
     refetchOnWindowFocus: false,
-    refetchInterval: REFETCH_INTERVAL_MS
+    refetchInterval: REFETCH_INTERVAL_MS,
+    enabled: !!coinId
   });
 
   if (coinData?.length && coinId.length) coins = coinData;

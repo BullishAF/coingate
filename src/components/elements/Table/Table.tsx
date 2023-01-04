@@ -32,7 +32,7 @@ const Table = ({
     InputWrapper,
     SearchIcon,
     Input,
-    Table
+    TableWrapper
   } = classes;
 
   const isSmallScreen = useMediaQuery(`(max-width: ${SMALL_VW}px)`);
@@ -113,19 +113,20 @@ const Table = ({
         </div>
       )}
 
-      <MTable
-        verticalSpacing="sm"
-        horizontalSpacing="lg"
-        highlightOnHover={highlightOnHover && !loading}
-        className={Table}
-        {...props}
-      >
-        <thead>
-          <tr>{renderTableHeaders()}</tr>
-        </thead>
+      <div className={TableWrapper}>
+        <MTable
+          verticalSpacing="xs"
+          horizontalSpacing="xs"
+          highlightOnHover={highlightOnHover && !loading}
+          {...props}
+        >
+          <thead>
+            <tr>{renderTableHeaders()}</tr>
+          </thead>
 
-        <tbody>{renderTableData()}</tbody>
-      </MTable>
+          <tbody>{renderTableData()}</tbody>
+        </MTable>
+      </div>
     </>
   );
 };

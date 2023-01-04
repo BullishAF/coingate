@@ -6,20 +6,27 @@ import type { AxiosResponse } from 'axios';
 import { api } from '@/config';
 import { TOTAL_ITEMS_PER_PAGE } from '@/constants';
 
-import type { Coin, Exchange, GlobalData } from './types';
+import type { Coin, Exchange, GetCoinsRequestProps, GlobalData } from './types';
 
 const useCoinGeckoApi = () => {
-  const getCoins = useCallback(async (desiredPage = 1) => {
-    const { data }: AxiosResponse<Array<Coin>> = await api.get(
-      `/coins/markets?vs_currency=usd&page=${desiredPage}&per_page=${TOTAL_ITEMS_PER_PAGE}&price_change_percentage=24h,7d,30d&sparkline=true`
-    );
-    if (!data || !data.length) {
-      toast.error('Could not fetch coins. Please try again later');
-      return;
-    }
+  const getCoins = useCallback(
+    async ({ page, total, includeTimeSeries }: GetCoinsRequestProps) => {
+      let requestUrl = `/coins/markets?vs_currency=usd&page=${page ?? 1}
+      &per_page=${total ?? TOTAL_ITEMS_PER_PAGE}`;
 
-    return data;
-  }, []);
+      if (includeTimeSeries)
+        requestUrl += '&price_change_percentage=24h,7d,30d&sparkline=true';
+
+      const { data }: AxiosResponse<Array<Coin>> = await api.get(requestUrl);
+      if (!data || !data.length) {
+        toast.error('Could not fetch coins. Please try again later');
+        return;
+      }
+
+      return data;
+    },
+    []
+  );
 
   const getCoinById = useCallback(async (id: string) => {
     const { data }: AxiosResponse<Array<Coin>> = await api.get(

@@ -36,7 +36,7 @@ const Coins = () => {
   const { classes } = useStyles();
   const {
     Wrapper,
-    TableWrapper,
+    Content,
     TableData,
     SparklinesWrapper,
     StarIconFilled,
@@ -53,7 +53,7 @@ const Coins = () => {
   const { watchlistCoin, coinsWatchlist } = useWatchlist();
 
   const isLoading =
-    coinsState.isLoading || coinState.isLoading || coinsState.isFetching;
+    coinsState.isLoading || coinsState.isFetching || coinState.isFetching;
 
   const totalCoinsPerPage =
     +getTotalActiveCryptocurrencies(false) / TOTAL_ITEMS_PER_PAGE;
@@ -110,7 +110,9 @@ const Coins = () => {
           </td>
 
           <td>
-            <Text>{formatCurrency(coin.current_price)}</Text>
+            <Text>
+              {formatCurrency(coin.current_price, { maximumFractionDigits: 3 })}
+            </Text>
           </td>
 
           <td>
@@ -133,13 +135,21 @@ const Coins = () => {
 
           <td>
             <div className={TableData}>
-              <Text>{formatCurrency(coin.market_cap)}</Text>
+              <Text>
+                {formatCurrency(coin.current_price * coin.circulating_supply, {
+                  maximumFractionDigits: 0
+                })}
+              </Text>
             </div>
           </td>
 
           <td>
             <div>
-              <Text>{formatNumber(coin.total_volume)}</Text>
+              <Text>
+                {formatNumber(coin.total_volume, {
+                  maximumFractionDigits: 0
+                })}
+              </Text>
 
               {!!coin.total_volume && (
                 <Text size="xs" color="gray">
@@ -150,7 +160,11 @@ const Coins = () => {
             </div>
           </td>
 
-          <td>{formatNumber(coin.circulating_supply)}</td>
+          <td>
+            {formatNumber(coin.circulating_supply, {
+              maximumFractionDigits: 0
+            })}
+          </td>
 
           <td>
             <div className={SparklinesWrapper}>
@@ -180,7 +194,7 @@ const Coins = () => {
 
   return (
     <div className={Wrapper}>
-      <div className={TableWrapper}>
+      <div className={Content}>
         {isMounting && <Skeleton height={1200} />}
 
         {!isMounting && (

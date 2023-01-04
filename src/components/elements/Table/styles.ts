@@ -51,7 +51,11 @@ export const useStyles = createStyles((theme) => ({
       padding: '0.4rem'
     }
   },
-  Table: {
-    backgroundColor: theme.colors.shapeLight
+  TableWrapper: {
+    overflowX: 'auto',
+
+    '> table': {
+      backgroundColor: theme.colors.shapeLight
+    }
   }
 }));

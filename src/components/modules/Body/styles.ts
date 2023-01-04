@@ -22,12 +22,11 @@ export const useStyles = createStyles(() => ({
     '@media (max-width: 1585px)': {
       width: '90%'
     },
-    '@media (max-width: 1060px)': {
+    '@media (max-width: 768px)': {
       flexWrap: 'wrap',
-      justifyContent: 'flex-start',
       gap: '2rem'
     },
-    '@media (max-width: 768px)': {
+    '@media (max-width: 400px)': {
       flexDirection: 'column',
       gap: '1.25rem',
       paddingLeft: '1rem'
