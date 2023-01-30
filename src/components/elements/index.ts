@@ -1,5 +1,6 @@
 import Badge from './Badge';
 import InfoItem from './InfoItem';
+import MarqueeItem from './MarqueeItem';
 import PercentageText from './PercentageText';
 import ScrollBtn from './ScrollBtn';
 import SectionItem from './SectionItem';
@@ -12,6 +13,7 @@ export {
   PercentageText,
   ScrollBtn,
   SectionItem,
+  MarqueeItem,
   Sparklines,
   Table
 };

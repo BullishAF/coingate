@@ -6,7 +6,13 @@ import type { AxiosResponse } from 'axios';
 import { api } from '@/config';
 import { TOTAL_ITEMS_PER_PAGE } from '@/constants';
 
-import type { Coin, Exchange, GetCoinsRequestProps, GlobalData } from './types';
+import type {
+  Coin,
+  Exchange,
+  GetCoinsRequestProps,
+  GlobalData,
+  TrendingData
+} from './types';
 
 const useCoinGeckoApi = () => {
   const getCoins = useCallback(
@@ -70,13 +76,26 @@ const useCoinGeckoApi = () => {
     return data?.data;
   }, []);
 
+  const getTrendingCoinsInLast24h = useCallback(async () => {
+    const { data }: AxiosResponse<TrendingData> = await api.get(
+      '/search/trending'
+    );
+    if (!data) {
+      toast.error('Could not fetch trending coins. Please try again later');
+      return;
+    }
+
+    return data?.coins;
+  }, []);
+
   return {
     getCoins,
     getCoinById,
     getCoinFullDataById,
     getExchanges,
     getExchangeById,
-    getGlobalData
+    getGlobalData,
+    getTrendingCoinsInLast24h
   };
 };
 

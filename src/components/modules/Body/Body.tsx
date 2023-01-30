@@ -1,17 +1,27 @@
+import Marquee from 'react-fast-marquee';
+
 import { Skeleton } from '@mantine/core';
 import { motion } from 'framer-motion';
 
 import { M_PROPS, TABS } from '@/constants';
-import { useGlobalData } from '@/hooks';
+import { useGlobalData, useTrendingCoins } from '@/hooks';
+import { formatNumber } from '@/utils';
 
 import { CoinsTab, ExchangesTab } from '../';
-import { Badge, InfoItem, PercentageText } from '../../elements';
+import { Badge, InfoItem, MarqueeItem, PercentageText } from '../../elements';
 import { useStyles } from './styles';
 import type { BodyProps } from './types';
 
 const Body = ({ activeTab }: BodyProps) => {
   const { classes, theme } = useStyles();
-  const { Wrapper, MarketInfoWrapper, BadgeWrapper } = classes;
+  const {
+    Wrapper,
+    MarketInfoWrapper,
+    BadgeWrapper,
+    TrendingCoinsMarqueeWrapper
+  } = classes;
+
+  const { trendingCoins } = useTrendingCoins();
 
   const {
     getTotalMarketCap,
@@ -37,6 +47,22 @@ const Body = ({ activeTab }: BodyProps) => {
 
   return (
     <div className={Wrapper}>
+      <Marquee pauseOnHover className={TrendingCoinsMarqueeWrapper}>
+        {trendingCoins.map(({ item }) => (
+          <MarqueeItem
+            key={item.id}
+            iconUrl={item.thumb}
+            title={item.name}
+            subtitle={`(${item.symbol} #${
+              item.market_cap_rank
+            }) at ${item.score++}º place in 24h trend, ${formatNumber(
+              item.price_btc,
+              { maximumFractionDigits: 8 }
+            )} BTC`}
+          />
+        ))}
+      </Marquee>
+
       <Skeleton
         height="100px"
         visible={isLoading}
