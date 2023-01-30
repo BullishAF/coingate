@@ -5,12 +5,13 @@ export const useStyles = createStyles(() => ({
     width: '100%',
     height: '100%',
     display: 'flex',
-    flexDirection: 'column',
-    marginTop: '7.5rem',
-
-    '@media (max-width: 768px)': {
-      marginTop: '6.5rem'
-    }
+    flexDirection: 'column'
+  },
+  TrendingCoinsMarqueeWrapper: {
+    height: '2.2rem',
+    marginTop: '3.8rem',
+    cursor: 'default',
+    backgroundColor: '#f5f5f5'
   },
   MarketInfoWrapper: {
     width: '75%',
@@ -18,6 +19,7 @@ export const useStyles = createStyles(() => ({
     display: 'flex',
     justifyContent: 'space-between',
     margin: '0 auto',
+    marginTop: '3.5rem',
 
     '@media (max-width: 1585px)': {
       width: '90%'

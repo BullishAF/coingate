@@ -43,3 +43,20 @@ export type GlobalData = {
     };
   };
 };
+
+export type TrendingCoin = {
+  item: {
+    id: string;
+    coin_id: string;
+    name: string;
+    symbol: string;
+    market_cap_rank: number;
+    score: number;
+    thumb: string;
+    price_btc: number;
+  };
+};
+
+export type TrendingData = {
+  coins: Array<TrendingCoin>;
+};
