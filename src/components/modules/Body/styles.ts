@@ -19,7 +19,7 @@ export const useStyles = createStyles(() => ({
     display: 'flex',
     justifyContent: 'space-between',
     margin: '0 auto',
-    marginTop: '3.5rem',
+    marginTop: '3.15rem',
 
     '@media (max-width: 1585px)': {
       width: '90%'

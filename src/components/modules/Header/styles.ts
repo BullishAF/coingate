@@ -40,7 +40,7 @@ export const useStyles = createStyles((theme) => ({
     }
   },
   AppSections: {
-    width: '12rem',
+    width: 'fit-content',
     display: 'flex',
     justifyContent: 'space-between'
   }
