@@ -9,7 +9,7 @@ export const useStyles = createStyles((theme) => ({
   Content: {
     width: '80%',
     margin: '0 auto',
-    marginTop: '3.5rem',
+    marginTop: '3.15rem',
 
     td: {
       overflowY: 'hidden'

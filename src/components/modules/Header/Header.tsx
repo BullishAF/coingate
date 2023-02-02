@@ -1,3 +1,6 @@
+import { CgArrowsExchange } from 'react-icons/cg';
+import { RiCoinLine } from 'react-icons/ri';
+
 import { Text } from '@mantine/core';
 
 import { TABS } from '@/constants';
@@ -26,12 +29,14 @@ const Header = ({ onChangeTab, activeTab }: HeaderProps) => {
           <SectionItem
             title="Coins"
             active={activeTab === TABS.COINS}
+            icon={<RiCoinLine size={18} />}
             onClick={() => onChangeTab(TABS.COINS as AppTab)}
           />
 
           <SectionItem
             title="Exchanges"
             active={activeTab === TABS.EXCHANGES}
+            icon={<CgArrowsExchange size={18} />}
             onClick={() => onChangeTab(TABS.EXCHANGES as AppTab)}
           />
         </div>

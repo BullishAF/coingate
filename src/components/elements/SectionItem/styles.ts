@@ -2,7 +2,7 @@ import { createStyles } from '@mantine/core';
 
 export const useStyles = createStyles((theme) => ({
   Wrapper: {
-    width: '6rem',
+    width: '7.5rem',
     height: '100%',
     display: 'flex',
     flexDirection: 'column',
@@ -10,9 +10,11 @@ export const useStyles = createStyles((theme) => ({
     position: 'relative',
     cursor: 'pointer'
   },
-  Text: {
+  SectionTitleWrapper: {
     display: 'flex',
+    alignItems: 'center',
     justifyContent: 'center',
+    gap: '0.5rem',
     transition: 'all 0.2s ease',
 
     '&:hover': {
