@@ -1,9 +1,11 @@
+import type { FunctionComponent } from 'react';
 import Marquee from 'react-fast-marquee';
 
 import { Skeleton } from '@mantine/core';
+import { useMediaQuery } from '@mantine/hooks';
 import { motion } from 'framer-motion';
 
-import { M_PROPS, TABS } from '@/constants';
+import { M_PROPS, SMALL_VW, TABS } from '@/constants';
 import { useGlobalData, useTrendingCoins } from '@/hooks';
 import { formatNumber } from '@/utils';
 
@@ -12,7 +14,7 @@ import { Badge, InfoItem, MarqueeItem, PercentageText } from '../../elements';
 import { useStyles } from './styles';
 import type { BodyProps } from './types';
 
-const Body = ({ activeTab }: BodyProps) => {
+const Body: FunctionComponent<BodyProps> = ({ activeTab }) => {
   const { classes, theme } = useStyles();
   const {
     Wrapper,
@@ -34,11 +36,13 @@ const Body = ({ activeTab }: BodyProps) => {
 
   const totalMarketCapChangePercentage = +getTotalMarketCapChangePercentage();
 
+  const matchSmallVW = useMediaQuery(`(max-width: ${SMALL_VW}px)`);
+
   const renderActiveTab = () => {
     switch (activeTab) {
-      case TABS.COINS:
+      case TABS.Coins:
         return <CoinsTab />;
-      case TABS.EXCHANGES:
+      case TABS.Exchanges:
         return <ExchangesTab />;
       default:
         return <CoinsTab />;
@@ -47,7 +51,11 @@ const Body = ({ activeTab }: BodyProps) => {
 
   return (
     <div className={Wrapper}>
-      <Marquee pauseOnHover className={TrendingCoinsMarqueeWrapper}>
+      <Marquee
+        pauseOnHover
+        gradient={!matchSmallVW}
+        className={TrendingCoinsMarqueeWrapper}
+      >
         {trendingCoins.map(({ item }) => (
           <MarqueeItem
             key={item.id}

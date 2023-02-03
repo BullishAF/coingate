@@ -1,3 +1,4 @@
+import type { FunctionComponent } from 'react';
 import {
   Sparklines as DSparklines,
   SparklinesLine as DSparklinesLine
@@ -9,14 +10,14 @@ import { DEFAULT_SPARKLINE_DATA } from '@/constants';
 
 import type { SparklinesProps } from './types';
 
-const Sparklines = ({
+const Sparklines: FunctionComponent<SparklinesProps> = ({
   dynamicColorBasedOnValue,
   color = 'gray',
   strokeWidth = '2',
   filled = false,
   data,
   ...props
-}: SparklinesProps) => {
+}) => {
   const { colors } = useMantineTheme();
 
   if (dynamicColorBasedOnValue && data)

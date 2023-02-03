@@ -4,7 +4,7 @@ import { TABS } from '@/constants';
 
 import type { AppTab } from './types';
 
-const APP_TABS = [TABS.COINS, TABS.EXCHANGES] as AppTab[];
+const APP_TABS = [TABS.Coins, TABS.Exchanges] as AppTab[];
 
 const useTabs = () => {
   const [activeTab, setActiveTab] = useState(APP_TABS[0]);

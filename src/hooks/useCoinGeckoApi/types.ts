@@ -4,6 +4,11 @@ export type GetCoinsRequestProps = Partial<{
   includeTimeSeries: boolean;
 }>;
 
+export type GetExchangesRequestProps = Omit<
+  GetCoinsRequestProps,
+  'includeTimeSeries'
+>;
+
 export type Coin = {
   id: string;
   name: string;
@@ -28,6 +33,8 @@ export type Exchange = {
   year_established: number;
   url: string;
   image: string;
+  country: string;
+  trust_score: number;
   trust_score_rank: number;
   trade_volume_24h_btc: number;
 };

@@ -1,9 +1,16 @@
+import type { FunctionComponent } from 'react';
+
 import { Text } from '@mantine/core';
 
 import { useStyles } from './styles';
 import type { SectionItemProps } from './types';
 
-const SectionItem = ({ title, active, icon, onClick }: SectionItemProps) => {
+const SectionItem: FunctionComponent<SectionItemProps> = ({
+  title,
+  active,
+  icon,
+  onClick
+}) => {
   const { classes } = useStyles();
   const { Wrapper, SectionTitleWrapper, Underline } = classes;
 

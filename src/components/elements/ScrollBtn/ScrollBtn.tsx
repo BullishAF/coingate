@@ -1,3 +1,4 @@
+import type { FunctionComponent } from 'react';
 import { IoMdArrowRoundUp } from 'react-icons/io';
 
 import { useWindowScroll } from '@mantine/hooks';
@@ -5,7 +6,7 @@ import { motion } from 'framer-motion';
 
 import { useStyles } from './styles';
 
-const ScrollBtn = () => {
+const ScrollBtn: FunctionComponent = () => {
   const { classes } = useStyles();
   const { ScrollButton, ScrollIcon } = classes;
 

@@ -1,5 +1,11 @@
 /* eslint-disable react/jsx-newline */
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import {
+  useCallback,
+  useEffect,
+  useMemo,
+  useState,
+  type FunctionComponent
+} from 'react';
 import { AiFillStar, AiOutlineStar } from 'react-icons/ai';
 
 import Image from 'next/image';
@@ -23,7 +29,7 @@ import {
 } from '../../../elements';
 import { useStyles } from './styles';
 
-const Coins = () => {
+const Coins: FunctionComponent = () => {
   const [isMounting, setIsMounting] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
   const [searchedCoin, setSearchedCoin] = useState('');
@@ -96,8 +102,8 @@ const Coins = () => {
                 <Image
                   src={coin.image}
                   alt={coin.name}
-                  width={25}
-                  height={25}
+                  width={24}
+                  height={24}
                 />
               )}
 
@@ -190,7 +196,7 @@ const Coins = () => {
     ]
   );
 
-  useEffect(() => setIsMounting(false), []);
+  useEffect(() => void setIsMounting(false), []);
 
   return (
     <div className={Wrapper}>

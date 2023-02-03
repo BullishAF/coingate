@@ -1,8 +1,10 @@
+import type { FunctionComponent } from 'react';
+
 import { useTabs } from '@/hooks';
 
 import { Body, Header } from '../../modules';
 
-const MainTemplate = () => {
+const MainTemplate: FunctionComponent = () => {
   const { handleChangeTab, activeTab } = useTabs();
 
   return (

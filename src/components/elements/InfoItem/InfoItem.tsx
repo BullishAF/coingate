@@ -1,9 +1,11 @@
+import type { FunctionComponent } from 'react';
+
 import { Text } from '@mantine/core';
 
 import { useStyles } from './styles';
 import type { InfoItemProps } from './types';
 
-const InfoItem = ({ title, value }: InfoItemProps) => {
+const InfoItem: FunctionComponent<InfoItemProps> = ({ title, value }) => {
   const { classes } = useStyles();
   const { Wrapper, Title, Value } = classes;
 

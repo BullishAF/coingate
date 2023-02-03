@@ -1,9 +1,15 @@
+import type { FunctionComponent } from 'react';
+
 import Image from 'next/image';
 
 import { useStyles } from './styles';
 import type { MarqueeItemProps } from './types';
 
-const MarqueeItem = ({ iconUrl, title, subtitle }: MarqueeItemProps) => {
+const MarqueeItem: FunctionComponent<MarqueeItemProps> = ({
+  iconUrl,
+  title,
+  subtitle
+}) => {
   const { classes } = useStyles();
   const { Wrapper, Content, TextWrapper, Title, Subtitle } = classes;
 
