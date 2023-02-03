@@ -1,8 +1,8 @@
 import type { HTMLMotionProps } from 'framer-motion';
 
 export const TABS = {
-  COINS: 'coins',
-  EXCHANGES: 'exchanges'
+  Coins: 'coins',
+  Exchanges: 'exchanges'
 };
 
 export const M_PROPS: HTMLMotionProps<'div'> = {
@@ -27,9 +27,20 @@ export const COINS_TABLE_HEADERS = [
   'Last 7 Days'
 ];
 
+export const EXCHANGES_TABLE_HEADERS = [
+  '',
+  '#',
+  'Exchange',
+  'Country Est.',
+  'Year Est.',
+  'Trust Score',
+  'Volume (24h)',
+  'Website'
+];
+
 export const BASE_DIVISOR = 1000000; // 1M
 
-export const SMALL_VW = 720;
+export const SMALL_VW = 768;
 
 export const TOTAL_ITEMS_PER_PAGE = 20;
 

@@ -1,7 +1,9 @@
+import type { FunctionComponent } from 'react';
+
 import { useStyles } from './styles';
 import type { BadgeProps } from './types';
 
-const Badge = ({ color, children }: BadgeProps) => {
+const Badge: FunctionComponent<BadgeProps> = ({ color, children }) => {
   const { classes } = useStyles();
   const { Wrapper } = classes;
 

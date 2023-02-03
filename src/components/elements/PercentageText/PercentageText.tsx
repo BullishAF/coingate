@@ -1,4 +1,5 @@
 /* eslint-disable react/jsx-no-useless-fragment */
+import type { FunctionComponent } from 'react';
 import { IoMdArrowDropdown, IoMdArrowDropup } from 'react-icons/io';
 
 import { Text, useMantineTheme } from '@mantine/core';
@@ -9,12 +10,12 @@ import { formatNumber } from '@/utils';
 import { useStyles } from './styles';
 import type { PercentageTextProps } from './types';
 
-const PercentageText = ({
+const PercentageText: FunctionComponent<PercentageTextProps> = ({
   value,
   weight = 'normal',
   prefersIndicatorIcon,
   dynamicColorBasedOnValue
-}: PercentageTextProps) => {
+}) => {
   const { classes } = useStyles();
   const { Wrapper, Icon } = classes;
 

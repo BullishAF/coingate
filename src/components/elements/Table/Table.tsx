@@ -1,4 +1,4 @@
-import { ChangeEvent, Fragment } from 'react';
+import { Fragment, type FunctionComponent } from 'react';
 import { IoSearchOutline } from 'react-icons/io5';
 
 import { Pagination, Skeleton, Table as MTable, Text } from '@mantine/core';
@@ -13,7 +13,7 @@ import {
 import { useStyles } from './styles';
 import type { TableProps } from './types';
 
-const Table = ({
+const Table: FunctionComponent<TableProps> = ({
   loading,
   searchable,
   searchPlaceholder,
@@ -24,7 +24,7 @@ const Table = ({
   data,
   highlightOnHover,
   ...props
-}: TableProps) => {
+}) => {
   const { classes } = useStyles();
   const {
     CenteredRow,
@@ -35,7 +35,7 @@ const Table = ({
     TableWrapper
   } = classes;
 
-  const isSmallScreen = useMediaQuery(`(max-width: ${SMALL_VW}px)`);
+  const matchSmallVW = useMediaQuery(`(max-width: ${SMALL_VW}px)`);
 
   const renderTableHeaders = () => {
     if (loading) {
@@ -94,9 +94,7 @@ const Table = ({
                   type="text"
                   placeholder={searchPlaceholder ?? 'Search...'}
                   className={Input}
-                  onChange={(e: ChangeEvent<HTMLInputElement>) =>
-                    onSearch!(e.target.value)
-                  }
+                  onChange={(e) => onSearch && onSearch(e.target.value)}
                 />
               </>
             )}
@@ -105,7 +103,7 @@ const Table = ({
           {totalItems ? (
             <Pagination
               color="gray"
-              size={isSmallScreen ? 'sm' : 'md'}
+              size={matchSmallVW ? 'sm' : 'md'}
               total={totalItems}
               onChange={onChangePage}
             />

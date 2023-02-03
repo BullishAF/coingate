@@ -4,11 +4,7 @@ import { REFETCH_INTERVAL_MS } from '@/constants';
 
 import { useCoinGeckoApi } from '../';
 import type { Coin } from '../useCoinGeckoApi/types';
-
-type UseCoinsProps = {
-  desiredPage: number;
-  coinId: string;
-};
+import type { UseCoinsProps } from './types';
 
 const useCoins = ({ desiredPage, coinId }: UseCoinsProps) => {
   const { getCoins, getCoinById } = useCoinGeckoApi();
@@ -31,8 +27,8 @@ const useCoins = ({ desiredPage, coinId }: UseCoinsProps) => {
     enabled: !!coinId
   });
 
-  if (coinData?.length && coinId.length) coins = coinData;
-  else if (coinsData?.length && !coinId.length) coins = coinsData;
+  if (coinsData?.length && !coinId.length) coins = coinsData;
+  else if (coinData?.length && coinId.length) coins = coinData;
 
   return {
     coinsState: { ...restCoinsState },

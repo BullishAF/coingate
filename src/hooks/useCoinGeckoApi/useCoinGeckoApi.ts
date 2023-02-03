@@ -10,6 +10,7 @@ import type {
   Coin,
   Exchange,
   GetCoinsRequestProps,
+  GetExchangesRequestProps,
   GlobalData,
   TrendingData
 } from './types';
@@ -48,22 +49,25 @@ const useCoinGeckoApi = () => {
     return data;
   }, []);
 
-  const getExchanges = useCallback(async () => {
-    const { data }: AxiosResponse<Array<Exchange>> = await api.get(
-      `/exchanges`
-    );
-    if (!data || !data.length) {
-      toast.error('Could not fetch exchanges. Please try again later');
-      return;
-    }
+  const getExchanges = useCallback(
+    async ({ page, total }: GetExchangesRequestProps) => {
+      const { data }: AxiosResponse<Array<Exchange>> = await api.get(
+        `/exchanges?page=${page ?? 1}&per_page=${total ?? TOTAL_ITEMS_PER_PAGE}`
+      );
+      if (!data || !data.length) {
+        toast.error('Could not fetch exchanges. Please try again later');
+        return;
+      }
 
-    return data;
-  }, []);
+      return data;
+    },
+    []
+  );
 
   const getExchangeById = useCallback(async (id: string) => {
     const { data }: AxiosResponse<Exchange> = await api.get(`/exchanges/${id}`);
 
-    return data;
+    return [data];
   }, []);
 
   const getGlobalData = useCallback(async () => {
