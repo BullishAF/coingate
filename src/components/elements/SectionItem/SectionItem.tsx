@@ -29,7 +29,9 @@ const SectionItem: FunctionComponent<SectionItemProps> = ({
       <div className={SectionTitleWrapper} style={isActiveStyles}>
         {!!icon && icon}
 
-        <Text size="sm">{title}</Text>
+        <Text size="sm" weight={isActiveStyles['weight']}>
+          {title}
+        </Text>
       </div>
 
       {active && <div className={Underline} />}

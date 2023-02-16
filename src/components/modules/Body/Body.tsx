@@ -19,8 +19,10 @@ const Body: FunctionComponent<BodyProps> = ({ activeTab }) => {
   const {
     Wrapper,
     MarketInfoWrapper,
+    SkeletonsWrapper,
     BadgeWrapper,
-    TrendingCoinsMarqueeWrapper
+    TrendingCoinsMarqueeWrapper,
+    TrendingCoinsMarquee
   } = classes;
 
   const { trendingCoins } = useTrendingCoins();
@@ -38,6 +40,17 @@ const Body: FunctionComponent<BodyProps> = ({ activeTab }) => {
 
   const matchSmallVW = useMediaQuery(`(max-width: ${SMALL_VW}px)`);
 
+  const renderSkeletons = () =>
+    Array.from({ length: 4 }).map((_, i) => (
+      <div key={i} className={SkeletonsWrapper}>
+        <Skeleton width="250px" height="20px" />
+
+        <Skeleton width="250px" height="45px" />
+
+        {i === 0 && <Skeleton width="100px" height="20px" />}
+      </div>
+    ));
+
   const renderActiveTab = () => {
     switch (activeTab) {
       case TABS.Coins:
@@ -51,67 +64,87 @@ const Body: FunctionComponent<BodyProps> = ({ activeTab }) => {
 
   return (
     <div className={Wrapper}>
-      <Marquee
-        pauseOnHover
-        gradient={!matchSmallVW}
-        className={TrendingCoinsMarqueeWrapper}
-      >
-        {trendingCoins.map(({ item }) => (
-          <MarqueeItem
-            key={item.id}
-            iconUrl={item.thumb}
-            title={item.name}
-            subtitle={`(${item.symbol} #${
-              item.market_cap_rank
-            }) at ${item.score++}º place in 24h trend, ${formatNumber(
-              item.price_btc,
-              { maximumFractionDigits: 8 }
-            )} BTC`}
-          />
-        ))}
-      </Marquee>
+      <div className={TrendingCoinsMarqueeWrapper}>
+        {isLoading && <Skeleton width="100%" height="20px" />}
 
-      <Skeleton
-        height="100px"
-        visible={isLoading}
-        className={MarketInfoWrapper}
-      >
-        <motion.div transition={{ delay: 1.5, type: 'tween' }} {...M_PROPS}>
-          <InfoItem title="MARKET CAPITALIZATION" value={getTotalMarketCap()} />
-
-          <div className={BadgeWrapper}>
-            <Badge
-              color={
-                totalMarketCapChangePercentage > 0
-                  ? theme.colors.successLight
-                  : theme.colors.dangerLight
-              }
-            >
-              <PercentageText
-                prefersIndicatorIcon
-                dynamicColorBasedOnValue
-                value={totalMarketCapChangePercentage}
-                weight="bold"
+        {!isLoading && (
+          <Marquee
+            pauseOnHover
+            gradient={!matchSmallVW}
+            className={TrendingCoinsMarquee}
+          >
+            {trendingCoins.map(({ item }) => (
+              <MarqueeItem
+                key={item.id}
+                iconUrl={item.thumb}
+                title={item.name}
+                subtitle={`(${item.symbol} #${
+                  item.market_cap_rank
+                }) at ${item.score++}º place in 24h trend, ${formatNumber(
+                  item.price_btc,
+                  { maximumFractionDigits: 8 }
+                )} BTC`}
               />
-            </Badge>
-          </div>
-        </motion.div>
+            ))}
+          </Marquee>
+        )}
+      </div>
 
-        <motion.div transition={{ delay: 1.75, type: 'tween' }} {...M_PROPS}>
-          <InfoItem title="24H VOLUME" value={getTotalMarketVolume()} />
-        </motion.div>
+      <div className={MarketInfoWrapper}>
+        {isLoading && renderSkeletons()}
 
-        <motion.div transition={{ delay: 2, type: 'tween' }} {...M_PROPS}>
-          <InfoItem title="BTC DOMINANCE" value={getBTCMarketCapPercentage()} />
-        </motion.div>
+        {!isLoading && (
+          <>
+            <motion.div transition={{ delay: 1.5, type: 'tween' }} {...M_PROPS}>
+              <InfoItem
+                title="MARKET CAPITALIZATION"
+                value={getTotalMarketCap()}
+              />
 
-        <motion.div transition={{ delay: 2.25, type: 'tween' }} {...M_PROPS}>
-          <InfoItem
-            title="ACTIVE COINS"
-            value={getTotalActiveCryptocurrencies()}
-          />
-        </motion.div>
-      </Skeleton>
+              <div className={BadgeWrapper}>
+                <Badge
+                  color={
+                    totalMarketCapChangePercentage > 0
+                      ? theme.colors.successLight
+                      : theme.colors.dangerLight
+                  }
+                >
+                  <PercentageText
+                    prefersIndicatorIcon
+                    dynamicColorBasedOnValue
+                    value={totalMarketCapChangePercentage}
+                    weight="bold"
+                  />
+                </Badge>
+              </div>
+            </motion.div>
+
+            <motion.div
+              transition={{ delay: 1.75, type: 'tween' }}
+              {...M_PROPS}
+            >
+              <InfoItem title="24H VOLUME" value={getTotalMarketVolume()} />
+            </motion.div>
+
+            <motion.div transition={{ delay: 2, type: 'tween' }} {...M_PROPS}>
+              <InfoItem
+                title="BTC DOMINANCE"
+                value={getBTCMarketCapPercentage()}
+              />
+            </motion.div>
+
+            <motion.div
+              transition={{ delay: 2.25, type: 'tween' }}
+              {...M_PROPS}
+            >
+              <InfoItem
+                title="ACTIVE COINS"
+                value={getTotalActiveCryptocurrencies()}
+              />
+            </motion.div>
+          </>
+        )}
+      </div>
 
       {renderActiveTab()}
     </div>
