@@ -37,6 +37,9 @@ export const useStyles = createStyles((theme) => ({
 
     '@media (max-width: 440px)': {
       marginLeft: '1rem'
+    },
+    '@media (max-width: 400px)': {
+      fontSize: '22px'
     }
   },
   AppSections: {

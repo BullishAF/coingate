@@ -55,6 +55,10 @@ export const useStyles = createStyles((theme) => ({
   LinkIcon: {
     width: '24px',
     height: '24px',
-    color: theme.colors.gray[6]
+    color: theme.colors.gray[6],
+    transition: 'filter 0.2s ease',
+    '&:hover': {
+      filter: 'brightness(0.8)'
+    }
   }
 }));
