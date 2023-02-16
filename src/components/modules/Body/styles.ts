@@ -10,7 +10,9 @@ export const useStyles = createStyles(() => ({
   TrendingCoinsMarqueeWrapper: {
     height: '2.2rem',
     marginTop: '3.8rem',
-    cursor: 'default',
+    cursor: 'default'
+  },
+  TrendingCoinsMarquee: {
     backgroundColor: '#f5f5f5'
   },
   MarketInfoWrapper: {
@@ -33,6 +35,11 @@ export const useStyles = createStyles(() => ({
       gap: '1.25rem',
       paddingLeft: '1rem'
     }
+  },
+  SkeletonsWrapper: {
+    display: 'flex',
+    flexDirection: 'column',
+    gap: '0.75rem'
   },
   BadgeWrapper: {
     width: '7rem',
