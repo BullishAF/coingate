@@ -5,6 +5,6 @@ export const useStyles = createStyles(() => ({
     display: 'flex',
     justifyContent: 'center',
     borderRadius: '10rem',
-    padding: '0.15rem 0'
+    padding: '0.25rem 0'
   }
 }));

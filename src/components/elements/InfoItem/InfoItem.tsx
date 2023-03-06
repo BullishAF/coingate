@@ -11,7 +11,7 @@ const InfoItem: FunctionComponent<InfoItemProps> = ({ title, value }) => {
 
   return (
     <div className={Wrapper}>
-      <Text color="gray" weight={600} className={Title}>
+      <Text color="gray" weight={700} className={Title}>
         {title}
       </Text>
 

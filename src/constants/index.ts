@@ -1,8 +1,8 @@
 import type { HTMLMotionProps } from 'framer-motion';
 
 export const TABS = {
-  Coins: 'coins',
-  Exchanges: 'exchanges'
+  Coins: 'coin prices',
+  Exchanges: 'exchanges stats'
 };
 
 export const M_PROPS: HTMLMotionProps<'div'> = {

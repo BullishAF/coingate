@@ -1,1 +1,1 @@
-export type AppTab = 'coins' | 'exchanges';
+export type AppTab = 'Prices' | 'News' | 'Exchanges' | 'Reserach';

@@ -6,7 +6,7 @@ export default function Home() {
   return (
     <div>
       <Head>
-        <title>coingate | Crypto statistics</title>
+        <title>coinwire.us | crypto media platform</title>
       </Head>
 
       <Main />
